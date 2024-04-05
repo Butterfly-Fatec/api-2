@@ -4,7 +4,7 @@
 ## 🎯 Objetivo do Projeto
 
 Somos alunos do 2° semestre do curso de Análise e Desenvolvimento de Sistemas da Instituição de Ensino FATEC - SJC. 
-Iremos realizar neste semestre o projeto que visa criar uma aplicação que permita acessar informações de um banco de dados MySQL usando apenas a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
+Iremos realizar neste semestre o projeto que visa criar uma aplicação que permite acessar informações de um banco de dados MySQL usando apenas a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
 
 <br>
 
