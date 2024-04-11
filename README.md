@@ -41,7 +41,7 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 
 ## 🏆 MVP
 
-![MVP](src\static\img\mvp.jpeg)
+![MVP](src/static/img/mvp.jpeg)
 
 <br>
 
