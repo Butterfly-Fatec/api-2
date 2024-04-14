@@ -60,8 +60,8 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
  </p>
 
 <p>
-   <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/VSCode-Dark.svg"/>
-   &nbsp;VSCode - IDE
+   <img align="left" title="vscode" height="30px" src="https://hermes.digitalinnovation.one/articles/cover/14f7ca38-af7d-4b21-a0d9-c581c2611e9b.png"/>
+   &nbsp; IntelliJ IDEA
  </p>
 
 <p>
