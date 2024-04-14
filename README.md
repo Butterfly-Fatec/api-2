@@ -79,6 +79,11 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
    &nbsp;Ollama - Executor de modelos de linguagem
  </p>
 
+ <p>
+   <img align="left" title="ollama" height="30px" src="https://pbs.twimg.com/profile_images/1755060270173429760/4WVc54_p_400x400.jpg"/>
+   &nbsp; LM Studio
+ </p>
+
 <br>
 
 <span id="equipe">
