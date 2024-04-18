@@ -23,9 +23,6 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
 |------|------------|------------|------------|--------|-----------------------|------------------------|
-| 1    | MÉDIA       | Eu, como responsável pelo projeto, quero elaborar o backlog para organizar as atividades do desenvolvimento | 5 | 1 | RNF1 | O backlog deve conter todas as atividades necessárias para o desenvolvimento do projeto. |
-| 2    | MÉDIA       | Eu, como responsável pelo projeto, quero documentar o projeto no GitHub para garantir o registro e compartilhamento de informações | 5 | 1 | RNF1 | O projeto deve ser documentado de forma clara e organizada no GitHub. |
-| 3    | MÉDIA       | Eu, como usuário, quero interagir com um protótipo funcional para experimentar as principais funcionalidades do sistema e entender como elas funcionam | 1 | 1 | RF2 | O protótipo deve conter as funcionalidades principais do sistema e permitir uma interação clara e intuitiva. |
 | 4    | ALTA       | Eu, como usuário, quero usar uma interface do usuário finalizada para ter uma experiência consistente e intuitiva ao navegar e interagir com o sistema. | 5 | 2 | RF2 | A interface do usuário deve estar finalizada e proporcionar uma experiência consistente e intuitiva. |
 | 5    | ALTA       | Eu, como usuário, quero inserir perguntas na interface do sistema em linguagem natural para facilitar a interação | 3 | 2 | RF2 | A interface deve permitir a inserção de perguntas em linguagem natural de forma clara e precisa. |
 | 6    | ALTA       | Eu, como desenvolvedor, quero converter perguntas em linguagem natural para consultas SQL para executar no banco de dados | 13 | 2 | RF3 | O sistema deve converter perguntas em linguagem natural em consultas SQL corretas e eficientes. |
