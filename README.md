@@ -11,11 +11,11 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 
 ### Requisitos Funcionais
 
-![Requisitos Funcionais](src/static/img/requisitos-funcionais.jpeg)
+![Requisitos Funcionais](src/main/resources/static/img/requisitos-funcionais.jpeg)
 
 ### Requisitos Não Funcionais
 
-![Requisitos Não Funcionais](src/static/img/requisitos-nao-funcionais.jpeg)
+![Requisitos Não Funcionais](src/main/resources/static/img/requisitos-nao-funcionais.jpeg)
 
 <br>
 
@@ -38,7 +38,7 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 
 ## 🏆 MVP
 
-![MVP](src/static/img/mvp.jpeg)
+![MVP](src/main/resources/static/img/mvp.jpeg)
 
 <br>
 
