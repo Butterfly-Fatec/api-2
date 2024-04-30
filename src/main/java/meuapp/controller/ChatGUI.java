@@ -1,9 +1,12 @@
 package meuapp.controller;
 
+import meuapp.config.OutputStyles;
 import meuapp.service.DataBaseService;
 import meuapp.service.LMStudioService;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLEditorKit;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,8 +55,11 @@ public class ChatGUI implements ActionListener {
         jFrame.add(input);
 
         this.output = new JEditorPane();
+        HTMLEditorKit editor = new HTMLEditorKit();
+        new OutputStyles().ApplyStyles(editor);
         output.setContentType("text/html");
         output.setEditable(false);
+        output.setEditorKit(editor);
 
         JScrollPane scrollPane = new JScrollPane(output);
         scrollPane.setBounds(10, 30, 580, 330);
