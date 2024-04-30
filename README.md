@@ -79,7 +79,7 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 
 ## Equipe
 
-Somos alunos do 2° semestre do curso de Análise e Desenvolvimento de Sistemas da instituição de ensiono Fatec SJC.
+Somos alunos do 2° semestre do curso de Análise e Desenvolvimento de Sistemas da instituição de ensino Fatec Prof° Jessen Vidal de São José dos Campos.
 
 | Função         | Nome                        | GitHub                                                                                                                               | LinkedIn                                                                                                                                    |
 |:--------------:|:---------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------:|
