@@ -6,13 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class FuturoChatGUI {
+public class SelectionSchemaGUI {
     private String selectedSchema;
-    private final DataBaseService dataBaseService;
 
-
-    public FuturoChatGUI(DataBaseService dataBaseService) {
-        this.dataBaseService = dataBaseService;
+    public SelectionSchemaGUI(DataBaseService dataBaseService) {
         JFrame jFrame = new JFrame();
         jFrame.setSize(600, 500);
         jFrame.setTitle("ChatBot");
@@ -59,23 +56,18 @@ public class FuturoChatGUI {
         jButton.setFont(new Font("Arial", Font.PLAIN, 16));
         jFrame.add(jButton);
         jFrame.setVisible(true);
+
+        jButton.addActionListener(e -> {
+            if (selectedSchema == null) {
+                JOptionPane.showMessageDialog(null, "Por favor, selecione um banco de dados!");
+                return;
+            }
+            jFrame.setVisible(false);
+            ChatGUI chatGUI = new ChatGUI(dataBaseService, selectedSchema);
+
+        });
+
     }
 
 
-    public String getSelectedSchema() {
-        return selectedSchema;
-    }
-
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        if (selectedSchema == null) {
-//            JOptionPane.showMessageDialog(null, "Por favor, selecione um banco de dados!");
-//            return;
-//        }
-//        try {
-//            sou
-//        } catch (IOException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//    }
 }

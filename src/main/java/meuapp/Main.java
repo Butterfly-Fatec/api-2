@@ -10,7 +10,9 @@ public class Main {
         propertiesLoader.loadProperties();
 
         DataBaseService dataBaseService = new DataBaseService();
-        ChatGUI chatGUI = new ChatGUI(dataBaseService);
+
+        // só trocar o selectionSchemaGUI: "seu_banco_dados";
+        ChatGUI chatGUI = new ChatGUI(dataBaseService, "cinemark");
 
     }
 }
