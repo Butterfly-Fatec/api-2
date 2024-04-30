@@ -1,14 +1,22 @@
 package meuapp.controller;
 
-import meuapp.service.DataBaseService;
-import meuapp.service.LMStudioService;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+import meuapp.service.DataBaseService;
+import meuapp.service.LMStudioService;
 
 public class ChatGUI implements ActionListener {
     private String selectedSchema;
@@ -27,12 +35,11 @@ public class ChatGUI implements ActionListener {
         jFrame.setBackground(Color.blue);
         jFrame.setLayout(null);
 
-
         JLabel jLabel1 = new JLabel();
         jLabel1.setText("Escolher banco de dados: ");
         jLabel1.setBounds(100, 80, 300, 50);
         jLabel1.setFont(new Font("Arial", Font.PLAIN, 18));
-//        jFrame.add(jLabel1);
+        // jFrame.add(jLabel1);
 
         JLabel jLabel2 = new JLabel();
         jLabel2.setText("Chat Bot");
@@ -79,7 +86,7 @@ public class ChatGUI implements ActionListener {
         ArrayList<String> listSchemas = dataBaseService.getSchemas();
         JComboBox<String> schemaOptions = new JComboBox<>(listSchemas.toArray(new String[0]));
         schemaOptions.setBounds(350, 57, 150, 100);
-//        jFrame.add(schemaOptions);
+        // jFrame.add(schemaOptions);
         schemaOptions.addActionListener(e -> {
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
             selectedSchema = (String) comboBox.getSelectedItem();
@@ -87,22 +94,23 @@ public class ChatGUI implements ActionListener {
         jFrame.setVisible(true);
     }
 
-
     public String getSelectedSchema() {
         return selectedSchema;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        if (selectedSchema == null) {
-//            JOptionPane.showMessageDialog(null, "Por favor, selecione um banco de dados!");
-//            return;
-//        }
-        this.dataBaseService.DataSchema("cinemark");
+        // if (selectedSchema == null) {
+        // JOptionPane.showMessageDialog(null, "Por favor, selecione um banco de
+        // dados!");
+        // return;
+        // }
+        this.dataBaseService.DataSchema("teste-api-2");
+        System.out.println(this.dataBaseService.getDataSchemas());
         LMStudioService lmStudioService = new LMStudioService(this.input, this.dataBaseService);
         try {
             lmStudioService.connectionLMStudio();
-            this.output.setText(lmStudioService.resultSQL("cinemark"));
+            this.output.setText(lmStudioService.resultSQL("teste-api-2"));
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

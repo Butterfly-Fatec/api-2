@@ -1,22 +1,25 @@
 package meuapp.service;
 
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import meuapp.config.ConnectionFactory;
 
-import java.sql.*;
-import java.util.ArrayList;
-
-
-public class    DataBaseService extends ConnectionFactory{
+public class DataBaseService extends ConnectionFactory {
     ArrayList<String> schemas;
     StringBuilder dataSchemas;
 
-    public DataBaseService(){
+    public DataBaseService() {
         this.schemas = new ArrayList<>();
         this.dataSchemas = new StringBuilder();
     }
 
-    public void FilterSchemas(){
+    public void FilterSchemas() {
         try (Connection connection = ConnectionFactory.getConnection()) {
             DatabaseMetaData metaData = connection.getMetaData();
             ResultSet resultSets = metaData.getCatalogs();
@@ -34,7 +37,6 @@ public class    DataBaseService extends ConnectionFactory{
             System.out.println("Error FilterSchemas: " + e.getMessage());
         }
     }
-
 
     public void DataSchema(String nameSchema) {
         this.dataSchemas.append("[SCHEMA NAME: ").append(nameSchema).append("] ");
@@ -71,7 +73,4 @@ public class    DataBaseService extends ConnectionFactory{
         return this.dataSchemas;
     }
 
-
 }
-
-
