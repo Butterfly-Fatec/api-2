@@ -1,8 +1,6 @@
 ![](src/main/resources/static/img/SQLBot.png)
 <h1 align="left">SQL Chat Bot </h1>
 
-## Objetivo do Projeto
-
 O projeto visa criar uma aplicação que permite acessar informações de um banco de dados MySQL usando exclusivamente a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
 
 ## Requisitos Funcionais
