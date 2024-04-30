@@ -1,26 +1,27 @@
-<h1 align="center"> Assistente para Análise de Dados</h1>
+![](src/main/resources/static/img/SQLBot.png)
+<h1 align="left">SQL Chat Bot </h1>
 
-
-## 🎯 Objetivo do Projeto
+## Objetivo do Projeto
 
 O projeto visa criar uma aplicação que permite acessar informações de um banco de dados MySQL usando exclusivamente a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
 
-<br>
+## Requisitos Funcionais
+<ul>
+<li>Permitir ao usuário selecionar um banco de dados</li>
+<li>Criação de uma tela para receber uma consulta escrita em linguagem natural</li>
+<li>Conversão da linguagem natural em código SQL</li>
+<li>Execução do comando SQL gerado no banco de dados</li>
+<li>Exibição dos resultados</li>
+</ul>
 
-## 📜 Requisitos Funcionais e Não Funcionais
+## Requisitos Não Funcionais
+<ul>
+<li>Manual do Usuário (GitHub)</li>
+<li>Guia de instalação (GitHub)</li>
+<li>Usabilidade</li>
+</ul>
 
-### Requisitos Funcionais
-
-![Requisitos Funcionais](src/main/resources/static/img/RF.jpg)
-
-### Requisitos Não Funcionais
-
-![Requisitos Não Funcionais](src/main/resources/static/img/RNF.jpg)
-
-<br>
-
-## 📜 Backlog
-
+## Backlog
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
 |------|------------|------------|------------|--------|-----------------------|------------------------|
 | 1   | ALTA       | Eu, como usuário, quero usar uma interface do usuário finalizada para ter uma experiência consistente e intuitiva ao navegar e interagir com o sistema. | 5 | 2 | RF2 | A interface do usuário deve estar finalizada e proporcionar uma experiência consistente e intuitiva. |
@@ -34,15 +35,11 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 | 9  | BAIXA      | Eu, como usuário, quero poder ler o manual do aplicativo para entender suas funcionalidades e como usá-lo | 5 | 4 | RNF1 | O manual do aplicativo deve estar disponível de forma clara e acessível para o usuário. |
 | 10  | BAIXA      | Eu, como usuário, quero poder ler o guia de instalação para o funcionamento do aplicativo para garantir uma instalação correta | 4 | 4 | RNF2 | O guia de instalação deve fornecer instruções claras e precisas para uma instalação correta do aplicativo. |
 
-<br>
-
-## 🏆 MVP
+## MVP
 
 ![MVP](src/main/resources/static/img/mvp.jpeg)
 
-<br>
-
-## 🛠️ Tecnologias
+## Tecnologias
 
 <p>
    <img align="left" title="java" height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Java-Dark.svg"/> &nbsp;Java - Linguagem de programação
@@ -81,11 +78,8 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
    &nbsp; LM Studio
  </p>
 
-<br>
 
-<span id="equipe">
-
-## 👥 Equipe
+## Equipe
 
 Somos alunos do 2° semestre do curso de Análise e Desenvolvimento de Sistemas da instituição de ensiono Fatec SJC.
 
@@ -97,8 +91,6 @@ Somos alunos do 2° semestre do curso de Análise e Desenvolvimento de Sistemas 
 | Dev Team       | Gabriel Vasconcelos Ferreira| <a href="https://github.com/gabrielvascf"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  | <a href="https://www.linkedin.com/in/gabriel-vasconcelos-255979262?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                    |
 | Dev Team       | Paloma Lima da Silva        | <a href="https://github.com/palomalima22"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>    | <a href="https://www.linkedin.com/in/paloma-lima-b2b00b201/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a> |
 | Dev Team       | Victor Herculano Godoy      | <a href="https://github.com/victorrgodoy"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  | <a href="https://www.linkedin.com/in/victorgodoy-/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>        |
-
-<br>
 
 [Voltar ao topo](#topo)
 
