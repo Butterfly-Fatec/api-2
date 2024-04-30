@@ -11,11 +11,11 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 
 ### Requisitos Funcionais
 
-![Requisitos Funcionais](src/main/resources/static/img/requisitos-funcionais.jpeg)
+![Requisitos Funcionais](src/main/resources/static/img/RF.jpg)
 
 ### Requisitos Não Funcionais
 
-![Requisitos Não Funcionais](src/main/resources/static/img/requisitos-nao-funcionais.jpeg)
+![Requisitos Não Funcionais](src/main/resources/static/img/RNF.jpg)
 
 <br>
 
