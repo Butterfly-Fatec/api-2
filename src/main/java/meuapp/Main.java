@@ -12,7 +12,7 @@ public class Main {
         DataBaseService dataBaseService = new DataBaseService();
 
         // só trocar o selectionSchemaGUI: "seu_banco_dados";
-        ChatGUI chatGUI = new ChatGUI(dataBaseService, "cinemark");
+        ChatGUI chatGUI = new ChatGUI(dataBaseService, "teste-api-2");
 
     }
 }

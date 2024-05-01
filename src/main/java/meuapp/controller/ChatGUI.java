@@ -1,20 +1,28 @@
 package meuapp.controller;
 
-import meuapp.config.OutputStyles;
-import meuapp.service.DataBaseService;
-import meuapp.service.LMStudioService;
-
-import javax.swing.*;
-import javax.swing.text.html.HTMLEditorKit;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 
-public class ChatGUI implements ActionListener {
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.text.html.HTMLEditorKit;
+
+import meuapp.config.OutputStyles;
+import meuapp.service.DataBaseService;
+import meuapp.service.LMStudioService;
+
+public class ChatGUI implements ActionListener, KeyListener {
     private final DataBaseService dataBaseService;
     private final String selectionSchemaGUI;
     private final JTextField input;
@@ -52,6 +60,7 @@ public class ChatGUI implements ActionListener {
             public void focusLost(FocusEvent e) {
             }
         });
+
         jFrame.add(input);
 
         this.output = new JEditorPane();
@@ -74,6 +83,8 @@ public class ChatGUI implements ActionListener {
         jFrame.setVisible(true);
 
         output.setText("<html>" + conversationHistory + "</html>");
+
+        input.addKeyListener(this); // Adicionando o KeyListener ao campo de entrada
     }
 
     @Override
@@ -96,6 +107,21 @@ public class ChatGUI implements ActionListener {
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Não precisa ser implementado, mas requerido pela interface KeyListener
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Não precisa ser implementado, mas requerido pela interface KeyListener
+    }
 }
-
-
