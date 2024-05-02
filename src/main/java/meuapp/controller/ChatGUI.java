@@ -34,7 +34,7 @@ public class ChatGUI implements ActionListener, KeyListener {
         this.dataBaseService = dataBaseService;
 
         JFrame jFrame = new JFrame();
-        jFrame.setSize(600, 500);
+        jFrame.setSize(615, 500);
         jFrame.setTitle("ChatBot");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setResizable(false);
@@ -46,7 +46,7 @@ public class ChatGUI implements ActionListener, KeyListener {
         conversationHistory += "<b>Bot:</b> Olá, eu sou o SQL bot, faça uma pergunta:<br><br>";
 
         this.input = new JTextField("Faça uma pergunta...");
-        input.setBounds(10, 400, 480, 40);
+        input.setBounds(10, 400, 470, 40);
         input.setForeground(new Color(12, 12, 12, 153));
         input.addFocusListener(new FocusListener() {
             @Override
@@ -93,14 +93,14 @@ public class ChatGUI implements ActionListener, KeyListener {
 
         try {
 
-            conversationHistory += "<b>You:</b> " + userQuestion + "<br>";
+            conversationHistory += "<b>You:</b> " + userQuestion + "<br><br>";
 
             this.dataBaseService.DataSchema(this.selectionSchemaGUI);
             LMStudioService lmStudioService = new LMStudioService(this.input, this.dataBaseService);
             lmStudioService.connectionLMStudio();
             String response = lmStudioService.resultSQL(this.selectionSchemaGUI);
 
-            conversationHistory += "<b>Bot:</b> " + response + "<br>";
+            conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
 
             output.setText("<html>" + conversationHistory + "</html>");
         } catch (IOException ex) {

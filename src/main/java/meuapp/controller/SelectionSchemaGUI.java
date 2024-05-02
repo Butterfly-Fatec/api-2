@@ -35,7 +35,7 @@ public class SelectionSchemaGUI {
 
         JLabel jLabel2 = new JLabel();
         jLabel2.setText("Selecionar Banco de Dados:");
-        jLabel2.setBounds(191, 250, 220, 50);
+        jLabel2.setBounds(191, 230, 220, 50);
         jLabel2.setFont(new Font("Arial", Font.PLAIN, 16));
         jLabel2.setForeground(Color.white);
         jFrame.add(jLabel2);
@@ -43,7 +43,7 @@ public class SelectionSchemaGUI {
         dataBaseService.FilterSchemas();
         ArrayList<String> listSchemas = dataBaseService.getSchemas();
         JComboBox<String> schemaOptions = new JComboBox<>(listSchemas.toArray(new String[0]));
-        schemaOptions.setBounds(188, 260, 222, 100);
+        schemaOptions.setBounds(188, 270, 222, 20);
         jFrame.add(schemaOptions);
         schemaOptions.addActionListener(e -> {
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
