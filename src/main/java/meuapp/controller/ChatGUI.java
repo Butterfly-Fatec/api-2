@@ -84,9 +84,10 @@ public class ChatGUI implements ActionListener, KeyListener {
 
         output.setText("<html>" + conversationHistory + "</html>");
 
-        input.addKeyListener(this); // Adicionando o KeyListener ao campo de entrada
+        input.addKeyListener(this); 
+        this.dataBaseService.DataSchema(this.selectionSchemaGUI);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         String userQuestion = input.getText();
@@ -94,8 +95,7 @@ public class ChatGUI implements ActionListener, KeyListener {
         try {
 
             conversationHistory += "<b>You:</b> " + userQuestion + "<br><br>";
-
-            this.dataBaseService.DataSchema(this.selectionSchemaGUI);
+            
             LMStudioService lmStudioService = new LMStudioService(this.input, this.dataBaseService);
             lmStudioService.connectionLMStudio();
             String response = lmStudioService.resultSQL(this.selectionSchemaGUI);

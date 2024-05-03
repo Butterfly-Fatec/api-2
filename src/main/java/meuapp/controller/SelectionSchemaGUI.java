@@ -48,6 +48,7 @@ public class SelectionSchemaGUI {
         schemaOptions.addActionListener(e -> {
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
             selectedSchema = (String) comboBox.getSelectedItem();
+            dataBaseService.DataSchema(selectedSchema);
         });
 
         JButton jButton = new JButton();
@@ -56,13 +57,17 @@ public class SelectionSchemaGUI {
         jButton.setFont(new Font("Arial", Font.PLAIN, 16));
         jFrame.add(jButton);
         jFrame.setVisible(true);
-
+        selectedSchema = listSchemas.size() > 0 ? listSchemas.get(0) : "";
+        if (!selectedSchema.isEmpty()) {
+            dataBaseService.DataSchema(selectedSchema);
+        }
         jButton.addActionListener(e -> {
             if (selectedSchema == null) {
                 JOptionPane.showMessageDialog(null, "Por favor, selecione um banco de dados!");
                 return;
             }
             jFrame.setVisible(false);
+            System.out.println(selectedSchema);
             ChatGUI chatGUI = new ChatGUI(dataBaseService, selectedSchema);
 
         });

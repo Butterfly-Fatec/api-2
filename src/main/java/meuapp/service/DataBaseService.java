@@ -39,6 +39,7 @@ public class DataBaseService extends ConnectionFactory {
     }
 
     public void DataSchema(String nameSchema) {
+        ClearSchemas();
         this.dataSchemas.append("[SCHEMA NAME: ").append(nameSchema).append("] ");
         try (Connection conn = DriverManager.getConnection(URL + "/" + nameSchema, USER, PASSWORD)) {
             String query = "SELECT * FROM information_schema.tables WHERE table_schema = ?";
@@ -64,7 +65,9 @@ public class DataBaseService extends ConnectionFactory {
             System.out.println("Error DataSchema: " + e.getMessage());
         }
     }
-
+    public void ClearSchemas() {
+        this.dataSchemas.delete(0, this.dataSchemas.length());
+    }
     public ArrayList<String> getSchemas() {
         return this.schemas;
     }
