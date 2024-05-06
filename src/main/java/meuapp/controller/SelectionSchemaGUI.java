@@ -21,7 +21,7 @@ public class SelectionSchemaGUI {
         jFrame.setLayout(null);
 
         JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("src/main/java/meuapp/controller/img/bot.png");
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/static/img/bot.png");
         imageLabel.setIcon(imageIcon);
         imageLabel.setBounds(260, 40, 100, 100);
         jFrame.add(imageLabel);
@@ -67,7 +67,6 @@ public class SelectionSchemaGUI {
                 return;
             }
             jFrame.setVisible(false);
-            System.out.println(selectedSchema);
             ChatGUI chatGUI = new ChatGUI(dataBaseService, selectedSchema);
 
         });

@@ -10,17 +10,19 @@ import java.util.ArrayList;
 
 import meuapp.config.ConnectionFactory;
 
-public class DataBaseService extends ConnectionFactory {
-    ArrayList<String> schemas;
-    StringBuilder dataSchemas;
+public class DataBaseService {
+    private ArrayList<String> schemas;
+    private StringBuilder dataSchemas;
+    private ConnectionFactory connectionFactory;
 
     public DataBaseService() {
         this.schemas = new ArrayList<>();
         this.dataSchemas = new StringBuilder();
+        this.connectionFactory = new ConnectionFactory();
     }
 
     public void FilterSchemas() {
-        try (Connection connection = ConnectionFactory.getConnection()) {
+        try (Connection connection = connectionFactory.getConnection()) {
             DatabaseMetaData metaData = connection.getMetaData();
             ResultSet resultSets = metaData.getCatalogs();
             while (resultSets.next()) {
@@ -40,31 +42,38 @@ public class DataBaseService extends ConnectionFactory {
 
     public void DataSchema(String nameSchema) {
         ClearSchemas();
-        this.dataSchemas.append("[SCHEMA NAME: ").append(nameSchema).append("] ");
-        try (Connection conn = DriverManager.getConnection(URL + "/" + nameSchema, USER, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(connectionFactory.getURL() + "/" + nameSchema, connectionFactory.getUSER(), connectionFactory.getPASSWORD())) {
             String query = "SELECT * FROM information_schema.tables WHERE table_schema = ?";
-
             try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
                 preparedStatement.setString(1, nameSchema);
                 ResultSet tables = preparedStatement.executeQuery();
 
                 while (tables.next()) {
                     String tableName = tables.getString("TABLE_NAME");
-                    this.dataSchemas.append("[TABLE NAME: ").append(tableName).append("] ");
-                    ResultSet columns = conn.getMetaData().getColumns(null, nameSchema, tableName, null);
+                    dataSchemas.append("CREATE TABLE ").append(tableName).append(" (\n");
 
+                    ResultSet columns = conn.getMetaData().getColumns(null, nameSchema, tableName, null);
                     while (columns.next()) {
                         String columnName = columns.getString("COLUMN_NAME");
-                        this.dataSchemas.append("[COLUMN NAME: ").append(columnName).append("] ");
+                        String dataType = columns.getString("TYPE_NAME");
+                        dataSchemas.append("    ").append(columnName).append(" ").append(dataType).append(",\n");
                     }
                     columns.close();
+
+                    dataSchemas.append(");\n\n");
+                    System.out.println(dataSchemas);
                 }
                 tables.close();
             }
         } catch (SQLException e) {
-            System.out.println("Error DataSchema: " + e.getMessage());
+            System.out.println("Error generating DDL: " + e.getMessage());
         }
     }
+
+
+
+
+
     public void ClearSchemas() {
         this.dataSchemas.delete(0, this.dataSchemas.length());
     }

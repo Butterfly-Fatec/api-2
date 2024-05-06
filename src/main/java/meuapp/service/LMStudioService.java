@@ -2,12 +2,13 @@ package meuapp.service;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.localai.LocalAiChatModel;
-import meuapp.config.PropertiesLoader;
+import meuapp.config.ConnectionFactory;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
 
 public class LMStudioService {
+    private ConnectionFactory connectionFactory;
     private static final String URL = "http://localhost:1234/v1/";
     private final JTextField input;
     private String sqlQuery;
@@ -16,6 +17,7 @@ public class LMStudioService {
     public LMStudioService(JTextField input, DataBaseService dataBaseService) {
         this.input = input;
         this.dataBaseService = dataBaseService;
+        this.connectionFactory = new ConnectionFactory();
     }
 
     public void connectionLMStudio() throws IOException {
@@ -25,32 +27,26 @@ public class LMStudioService {
                 .temperature(0.7)
                 .build();
 
-        String instructions = "### Task\n" +
-                "Generate a SQL query to answer [QUESTION][" + this.input.getText() + "][/QUESTION]\n\n" +
+        String instructions = "Task\n" +
+                "Generate a SQL query to answer [QUESTION]{"+this.input.getText()+"}[/QUESTION]\n\n" +
 
-                "### Database Schema\n" +
-                "The query will run on a database with the following schema:\n" +
-                "[" + dataBaseService.getDataSchemas() + "]\n\n" +
+                "Instructions\n" +
+                "If you cannot answer the question with the available database schema, return 'Eu não sei'\n\n" +
 
-                "### Answer SQL Query\n" +
-                "Given the database schema, here is the SQL query that answers [QUESTION][" + this.input.getText()
-                + "][/QUESTION]\n" +
+                "Database Schema\n" +
+                "The query will run on a database with the following schema: {"+dataBaseService.getDataSchemas()+"}\n\n" +
 
-                "[SQL] Your SQL query goes here [/SQL], no explanation and no formatted, use only data of schema";
+                "Answer\n" +
+                "Given the database schema, here is the SQL query that answers [QUESTION]{"+this.input.getText()+"}[/QUESTION]\n" +
+                "[SQL] Your SQL query goes here, always transform the question to english[/SQL]";
 
         this.sqlQuery = model.generate(instructions);
     }
 
     public String resultSQL(String selectedSchema) {
-        PropertiesLoader propertiesLoader = new PropertiesLoader();
-        propertiesLoader.loadProperties();
-        String URL = propertiesLoader.getURL();
-        String USER = propertiesLoader.getUSER();
-        String PASSWORD = propertiesLoader.getPASSWORD();
-
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            Connection connection = DriverManager.getConnection(URL + "/" + selectedSchema, USER, PASSWORD);
+            Connection connection = DriverManager.getConnection(connectionFactory.getURL() + "/" + selectedSchema, connectionFactory.getUSER(), connectionFactory.getPASSWORD());
             PreparedStatement statement = connection.prepareStatement(this.sqlQuery);
             ResultSet resultSet = statement.executeQuery();
             DBResultFormatter formatter = new DBResultFormatter();

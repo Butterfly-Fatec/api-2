@@ -5,10 +5,12 @@ import java.sql.SQLException;
 
 public class TestConnectionBD {
     public static void main(String[] args) {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
         try {
-            Connection connection = ConnectionFactory.getConnection();
+            Connection connection = connectionFactory.getConnection();
             if (connection != null) {
                 System.out.println("Conexão bem-sucedida!");
+                connection.close();
             } else {
                 System.out.println("Falha na conexão.");
             }
