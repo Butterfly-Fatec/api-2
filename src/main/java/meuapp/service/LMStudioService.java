@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class LMStudioService {
-    private ConnectionFactory connectionFactory;
+    private final ConnectionFactory connectionFactory;
     private static final String URL = "http://localhost:1234/v1/";
     private final JTextField input;
     private String sqlQuery;
@@ -38,28 +38,27 @@ public class LMStudioService {
 
                 "Answer\n" +
                 "Given the database schema, here is the SQL query that answers [QUESTION]{"+this.input.getText()+"}[/QUESTION]\n" +
-                "[SQL] Your SQL query goes here, always transform the question to english[/SQL]";
+                "[SQL] Your SQL query goes here[/SQL]";
 
         this.sqlQuery = model.generate(instructions);
     }
 
     public String resultSQL(String selectedSchema) {
-        StringBuilder stringBuilder = new StringBuilder();
+        String result = "";
         try {
             Connection connection = DriverManager.getConnection(connectionFactory.getURL() + "/" + selectedSchema, connectionFactory.getUSER(), connectionFactory.getPASSWORD());
             PreparedStatement statement = connection.prepareStatement(this.sqlQuery);
             ResultSet resultSet = statement.executeQuery();
             DBResultFormatter formatter = new DBResultFormatter();
-            String result = formatter.FormatResult(resultSet);
+            result = formatter.FormatResult(resultSet);
 
             resultSet.close();
             statement.close();
             connection.close();
-            return result;
 
         } catch (SQLException e) {
             System.out.println("Error filter result: " + e.getMessage());
         }
-        return stringBuilder.toString();
+        return result;
     }
 }

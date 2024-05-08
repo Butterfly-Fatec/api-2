@@ -1,19 +1,14 @@
 package meuapp.service;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.*;
 
 import meuapp.config.ConnectionFactory;
 
 public class DataBaseService {
-    private ArrayList<String> schemas;
-    private StringBuilder dataSchemas;
-    private ConnectionFactory connectionFactory;
+    private final ArrayList<String> schemas;
+    private final StringBuilder dataSchemas;
+    private final ConnectionFactory connectionFactory;
 
     public DataBaseService() {
         this.schemas = new ArrayList<>();
@@ -59,9 +54,7 @@ public class DataBaseService {
                         dataSchemas.append("    ").append(columnName).append(" ").append(dataType).append(",\n");
                     }
                     columns.close();
-
                     dataSchemas.append(");\n\n");
-                    System.out.println(dataSchemas);
                 }
                 tables.close();
             }
@@ -70,15 +63,11 @@ public class DataBaseService {
         }
     }
 
-
-
-
-
     public void ClearSchemas() {
         this.dataSchemas.delete(0, this.dataSchemas.length());
     }
     public ArrayList<String> getSchemas() {
-        return this.schemas;
+       return this.schemas;
     }
 
     public StringBuilder getDataSchemas() {

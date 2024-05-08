@@ -1,11 +1,8 @@
 package meuapp.config;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
-
+import java.sql.*;
 
 public class ConnectionFactory {
     private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
