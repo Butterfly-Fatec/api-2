@@ -7,18 +7,29 @@ import java.sql.SQLException;
 public class DBResultFormatter {
     public String FormatResult(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metadata = resultSet.getMetaData();
+        int colcount = metadata.getColumnCount();
         String columns = "";
         String rows = "";
-        for (int i = 1; i <= metadata.getColumnCount(); i++) {
-            columns += "<th>" + metadata.getColumnName(i) + "</th>";
+        if (resultSet.isLast()) {
+            return "Nenhum resultado encontrado.";
         }
-        while (resultSet.next()) {
-            rows += "<tr>";
-            for (int i = 1; i <= metadata.getColumnCount(); i++) {
-                rows += "<td>" + resultSet.getString(i) + "</td>";
+        if (colcount > 1) {
+            for (int i = 1; i <= colcount; i++) {
+                columns += "<th>" + metadata.getColumnName(i) + "</th>";
             }
-            rows += "</tr>";
+            while (resultSet.next()) {
+                rows += "<tr>";
+                for (int i = 1; i <= colcount; i++) {
+                    rows += "<td>" + resultSet.getString(i) + "</td>";
+                }
+                rows += "</tr>";
+            }
+            return "<table>" + columns + rows + "</table>";
+        } else {
+            while (resultSet.next()) {
+                rows += resultSet.getString(1) + (resultSet.isLast() ? "." : ", ");
+            }
+            return rows;
         }
-        return "<table>" + columns + rows + "</table>";
     }
 }
