@@ -1,13 +1,20 @@
 package meuapp.controller;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
-import meuapp.service.LMStudioService;
-
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 
 public class MainGUI {
     private String selectedSchema;
@@ -47,7 +54,6 @@ public class MainGUI {
         schemaLabel.setForeground(Color.WHITE);
         contentPane.add(schemaLabel);
 
-
         if (dataBaseService.getSchemas().isEmpty()) {
             dataBaseService.FilterSchemas();
         }
@@ -67,9 +73,6 @@ public class MainGUI {
         languageLabel.setForeground(Color.WHITE);
         contentPane.add(languageLabel);
 
-        if (chooseLLMService.getNameModel().isEmpty()) {
-            chooseLLMService.lmList();
-        }
         ArrayList<String> listLLM = chooseLLMService.getNameModel();
         JComboBox<String> llmOptions = new JComboBox<>(listLLM.toArray(new String[0]));
         llmOptions.setBounds(186, 290, 222, 50);
@@ -79,7 +82,6 @@ public class MainGUI {
             selectedLLM = (String) comboBox.getSelectedItem();
             dataBaseService.DataSchema(selectedLLM);
         });
-
 
         JButton startButton = new JButton("INICIAR");
         startButton.setBounds(190, 360, 220, 40);

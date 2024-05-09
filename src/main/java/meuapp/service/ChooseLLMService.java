@@ -1,59 +1,52 @@
 package meuapp.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.io.*;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class ChooseLLMService {
-    private ArrayList<String> nameModel;
+    public static List<String> getCommandResult(String command) throws IOException, InterruptedException {
+        List<String> resultList = new ArrayList<>();
 
-    public ChooseLLMService() {
-        this.nameModel = new ArrayList<>();
-    }
+        @SuppressWarnings("deprecation")
+        Process process = Runtime.getRuntime().exec(command);
+        process.waitFor();
 
-    public void lmList() {
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder("/Users/victorgodoy/.cache/lm-studio/bin/lms");
-            processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            StringBuilder output = new StringBuilder();
-
-            while ((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-            }
-            reader.close();
-
-            ProcessBuilder processBuilder2 = new ProcessBuilder("/Users/victorgodoy/.cache/lm-studio/bin/lms", "ls");
-            processBuilder2.redirectErrorStream(true);
-            Process process2 = processBuilder2.start();
-
-            BufferedReader reader2 = new BufferedReader(new InputStreamReader(process2.getInputStream()));
-            String line2;
-            StringBuilder output2 = new StringBuilder();
-
-            while ((line2 = reader2.readLine()) != null) {
-                output2.append(line2).append("\n");
-            }
-            reader2.close();
-
-            String[] lines = output2.toString().split("\n");
-            for (int i = 4; i < lines.length; i++) {
-                String[] dataModel = lines[i].split("\\s+");
-                if (dataModel.length > 0) {
-                    nameModel.add(dataModel[0]);
-
-                }
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error filter list LM models: " + e.getMessage());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            resultList.add(line);
         }
-    }
+        reader.close();
 
+        return resultList;
+    }
 
     public ArrayList<String> getNameModel() {
-        return nameModel;
+        List<String> resultList;
+        ArrayList<String> paths = new ArrayList<>();
+
+        try {
+            resultList = getCommandResult("lms ls --json");
+        } catch (IOException | InterruptedException e) {
+            // Aqui você pode lidar com a exceção localmente
+            System.err.println("Ocorreu um erro ao executar o comando: " + e.getMessage());
+            resultList = new ArrayList<>(); // Retorna uma lista vazia em caso de erro
+        }
+
+        for (String result : resultList) {
+            JSONArray jsonArray = new JSONArray(result);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                paths.add(jsonObject.getString("path"));
+            }
+        }
+
+        return paths;
     }
 }
