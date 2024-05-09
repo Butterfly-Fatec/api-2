@@ -7,8 +7,10 @@ import java.awt.event.*;
 import java.io.IOException;
 
 import meuapp.config.OutputStyles;
+import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
 import meuapp.service.LMStudioService;
+
 
 public class ChatGUI {
     private JFrame jFrame;
@@ -69,7 +71,7 @@ public class ChatGUI {
         output.setText("<html>" + conversationHistory + "</html>");
 
         JScrollPane scrollPane = new JScrollPane(output);
-        scrollPane.setBounds(10, 40, 580, 330);
+        scrollPane.setBounds(10, 55, 580, 330);
 
         JButton buttonSent = new JButton();
         buttonSent.setText("ENVIAR");
@@ -79,8 +81,8 @@ public class ChatGUI {
 
         JButton buttonReturn = new JButton();
         buttonReturn.setText("Voltar");
-        buttonReturn.setBounds(5,5, 100,30);
-        buttonReturn.setFont(new Font("Arial", Font.PLAIN, 12));
+        buttonReturn.setBounds(5,10, 80,35);
+        buttonReturn.setFont(new Font("Arial", Font.BOLD, 14));
         buttonReturn.addActionListener(e -> returnGUI());
 
         jFrame.add(input);
@@ -110,7 +112,8 @@ public class ChatGUI {
 
     private void returnGUI(){
         jFrame.setVisible(false);
-        new MainGUI(dataBaseService);
+        ChooseLLMService chooseLLMService = new ChooseLLMService();
+        new MainGUI(dataBaseService, chooseLLMService);
     }
 }
 

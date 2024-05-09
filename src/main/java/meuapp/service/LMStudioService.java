@@ -6,12 +6,14 @@ import meuapp.config.ConnectionFactory;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class LMStudioService {
     private final ConnectionFactory connectionFactory;
     private static final String URL = "http://localhost:1234/v1/";
     private final JTextField input;
     private String sqlQuery;
+    private ArrayList<String> nameModel;
     private final DataBaseService dataBaseService;
 
     public LMStudioService(JTextField input, DataBaseService dataBaseService) {
@@ -61,4 +63,5 @@ public class LMStudioService {
         }
         return result;
     }
+
 }
