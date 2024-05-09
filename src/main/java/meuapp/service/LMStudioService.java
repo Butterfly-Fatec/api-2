@@ -6,18 +6,18 @@ import meuapp.config.ConnectionFactory;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class LMStudioService {
     private final ConnectionFactory connectionFactory;
     private static final String URL = "http://localhost:1234/v1/";
     private final JTextField input;
-    private String sqlQuery;
-    private ArrayList<String> nameModel;
+    private String output;
+    private String querySQL;
     private final DataBaseService dataBaseService;
 
     public LMStudioService(JTextField input, DataBaseService dataBaseService) {
         this.input = input;
+        this.output = "";
         this.dataBaseService = dataBaseService;
         this.connectionFactory = new ConnectionFactory();
     }
@@ -42,17 +42,16 @@ public class LMStudioService {
                 "Given the database schema, here is the SQL query that answers [QUESTION]{"+this.input.getText()+"}[/QUESTION]\n" +
                 "[SQL] Your SQL query goes here[/SQL]";
 
-        this.sqlQuery = model.generate(instructions);
+        this.querySQL = model.generate(instructions);
     }
 
-    public String resultSQL(String selectedSchema) {
-        String result = "";
+    public void resultSQL(String selectedSchema) {
         try {
             Connection connection = DriverManager.getConnection(connectionFactory.getURL() + "/" + selectedSchema, connectionFactory.getUSER(), connectionFactory.getPASSWORD());
-            PreparedStatement statement = connection.prepareStatement(this.sqlQuery);
+            PreparedStatement statement = connection.prepareStatement(this.querySQL);
             ResultSet resultSet = statement.executeQuery();
             DBResultFormatter formatter = new DBResultFormatter();
-            result = formatter.FormatResult(resultSet);
+            this.output = formatter.FormatResult(resultSet);
 
             resultSet.close();
             statement.close();
@@ -61,7 +60,9 @@ public class LMStudioService {
         } catch (SQLException e) {
             System.out.println("Error filter result: " + e.getMessage());
         }
-        return result;
     }
 
+    public String getOutput() {
+        return output;
+    }
 }

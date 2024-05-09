@@ -1,52 +1,69 @@
 package meuapp.service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ChooseLLMService {
-    public static List<String> getCommandResult(String command) throws IOException, InterruptedException {
-        List<String> resultList = new ArrayList<>();
+    private final ArrayList<String> listJson;
+    private final ArrayList<String> listModels;
+    private String schemaSelected;
+    private static final String COMMAND_JSON = "lms ls --json";
+    private static final String COMMAND_LOAD_MODEL = "lms load";
+    private static final String COMMAND_UNLOAD_MODEL = "lms unload";
 
-        @SuppressWarnings("deprecation")
+    public ChooseLLMService() throws IOException, InterruptedException {
+        this.listJson = new ArrayList<>();
+        this.listModels = new ArrayList<>();
+        commandOne(COMMAND_JSON);
+        nameModel(listJson);
+        this.schemaSelected = "";
+    }
+
+    public void commandOne(String command) throws IOException, InterruptedException {
+
         Process process = Runtime.getRuntime().exec(command);
         process.waitFor();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
         while ((line = reader.readLine()) != null) {
-            resultList.add(line);
+            this.listJson.add(line);
         }
         reader.close();
-
-        return resultList;
     }
 
-    public ArrayList<String> getNameModel() {
-        List<String> resultList;
-        ArrayList<String> paths = new ArrayList<>();
+    public void commandTwo(String selectedLLM) throws IOException, InterruptedException {
+        this.schemaSelected = selectedLLM;
+        Process process = Runtime.getRuntime().exec(COMMAND_LOAD_MODEL + " "+ this.schemaSelected);
+        process.waitFor();
+    }
 
-        try {
-            resultList = getCommandResult("lms ls --json");
-        } catch (IOException | InterruptedException e) {
-            // Aqui você pode lidar com a exceção localmente
-            System.err.println("Ocorreu um erro ao executar o comando: " + e.getMessage());
-            resultList = new ArrayList<>(); // Retorna uma lista vazia em caso de erro
-        }
+    public void commandThree() throws IOException, InterruptedException {
+        Process process = Runtime.getRuntime().exec(COMMAND_UNLOAD_MODEL + " "+ this.schemaSelected);
+        process.waitFor();
+    }
 
-        for (String result : resultList) {
+
+
+    public void nameModel(ArrayList<String> listJson)  {
+        for (String result : listJson) {
             JSONArray jsonArray = new JSONArray(result);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                paths.add(jsonObject.getString("path"));
+                listModels.add(jsonObject.getString("path"));
             }
         }
-
-        return paths;
     }
+
+
+
+
+
+    public ArrayList<String> getListModels() {
+        return listModels;
+    }
+
 }

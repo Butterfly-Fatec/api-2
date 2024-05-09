@@ -19,10 +19,12 @@ public class ChatGUI {
     private JTextField input;
     private JEditorPane output;
     private String conversationHistory = "";
+    private final ChooseLLMService chooseLLMService;
 
-    public ChatGUI(DataBaseService dataBaseService, String selectionSchemaGUI) {
+    public ChatGUI(DataBaseService dataBaseService, String selectionSchemaGUI, ChooseLLMService chooseLLMService) {
         this.selectionSchemaGUI = selectionSchemaGUI;
         this.dataBaseService = dataBaseService;
+        this.chooseLLMService = chooseLLMService;
         SwingUtilities.invokeLater(this::configureGUI);
     }
 
@@ -83,7 +85,27 @@ public class ChatGUI {
         buttonReturn.setText("Voltar");
         buttonReturn.setBounds(5,10, 80,35);
         buttonReturn.setFont(new Font("Arial", Font.BOLD, 14));
-        buttonReturn.addActionListener(e -> returnGUI());
+        buttonReturn.addActionListener(e -> {
+            try {
+                chooseLLMService.commandThree();
+                returnGUI();
+            } catch (IOException | InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        jFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    chooseLLMService.commandThree();
+                } catch (IOException | InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                jFrame.dispose();
+            }
+        });
+
 
         jFrame.add(input);
         jFrame.add(scrollPane);
@@ -100,7 +122,8 @@ public class ChatGUI {
 
             LMStudioService lmStudioService = new LMStudioService(input, dataBaseService);
             lmStudioService.connectionLMStudio();
-            String response = lmStudioService.resultSQL(selectionSchemaGUI);
+            lmStudioService.resultSQL(selectionSchemaGUI);
+            String response = lmStudioService.getOutput();
 
             this.conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
 
@@ -110,7 +133,7 @@ public class ChatGUI {
         }
     }
 
-    private void returnGUI(){
+    private void returnGUI() throws IOException, InterruptedException {
         jFrame.setVisible(false);
         ChooseLLMService chooseLLMService = new ChooseLLMService();
         new MainGUI(dataBaseService, chooseLLMService);

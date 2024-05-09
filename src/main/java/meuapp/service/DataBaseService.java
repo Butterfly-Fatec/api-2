@@ -6,12 +6,12 @@ import java.sql.*;
 import meuapp.config.ConnectionFactory;
 
 public class DataBaseService {
-    private final ArrayList<String> schemas;
+    private final ArrayList<String> listSchemas;
     private final StringBuilder dataSchemas;
     private final ConnectionFactory connectionFactory;
 
     public DataBaseService() {
-        this.schemas = new ArrayList<>();
+        this.listSchemas= new ArrayList<>();
         this.dataSchemas = new StringBuilder();
         this.connectionFactory = new ConnectionFactory();
     }
@@ -26,7 +26,7 @@ public class DataBaseService {
                         !schemaName.equalsIgnoreCase("mysql") &&
                         !schemaName.equalsIgnoreCase("performance_schema") &&
                         !schemaName.equalsIgnoreCase("sys")) {
-                    this.schemas.add(schemaName);
+                    this.listSchemas.add(schemaName);
                 }
             }
             resultSets.close();
@@ -67,9 +67,8 @@ public class DataBaseService {
         this.dataSchemas.delete(0, this.dataSchemas.length());
     }
     public ArrayList<String> getSchemas() {
-       return this.schemas;
+       return this.listSchemas;
     }
-
     public StringBuilder getDataSchemas() {
         return this.dataSchemas;
     }
