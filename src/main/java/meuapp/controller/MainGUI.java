@@ -3,6 +3,7 @@ package meuapp.controller;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -19,13 +20,19 @@ import meuapp.service.DataBaseService;
 public class MainGUI {
     private String selectedSchema;
     private String selectedLLM;
-    private ChooseLLMService chooseLLMService;
 
     public MainGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService) {
-        SwingUtilities.invokeLater(() -> configureGUI(dataBaseService, chooseLLMService));
+        SwingUtilities.invokeLater(() -> {
+            try {
+                configureGUI(dataBaseService, chooseLLMService);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
-    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService) {
+
+    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService) throws IOException, InterruptedException {
         JFrame frame = new JFrame("ChatBot");
         frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,15 +80,16 @@ public class MainGUI {
         languageLabel.setForeground(Color.WHITE);
         contentPane.add(languageLabel);
 
-        ArrayList<String> listLLM = chooseLLMService.getNameModel();
+
+        ArrayList<String> listLLM = chooseLLMService.getListModels();
         JComboBox<String> llmOptions = new JComboBox<>(listLLM.toArray(new String[0]));
         llmOptions.setBounds(186, 290, 222, 50);
         contentPane.add(llmOptions);
         llmOptions.addActionListener(e -> {
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
             selectedLLM = (String) comboBox.getSelectedItem();
-            dataBaseService.DataSchema(selectedLLM);
         });
+
 
         JButton startButton = new JButton("INICIAR");
         startButton.setBounds(190, 360, 220, 40);
@@ -92,14 +100,34 @@ public class MainGUI {
                 JOptionPane.showMessageDialog(null, "Por favor, selecione um banco de dados!");
                 return;
             }
+
+            if (selectedLLM == null) {
+                JOptionPane.showMessageDialog(null, "Por favor, selecione um modelo de línguagem!");
+                return;
+            }
+            try {
+                chooseLLMService.commandTwo(selectedLLM);
+            } catch (InterruptedException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
             frame.dispose();
-            new ChatGUI(dataBaseService, selectedSchema);
+            new ChatGUI(dataBaseService, selectedSchema, chooseLLMService);
         });
+
         selectedSchema = listSchemas.isEmpty() ? "" : listSchemas.get(0);
+
         if (!selectedSchema.isEmpty()) {
             dataBaseService.DataSchema(selectedSchema);
         }
 
+        if (!listLLM.isEmpty()) {
+            selectedLLM = listLLM.get(0);
+            llmOptions.setSelectedItem(selectedLLM);
+        }
         frame.setVisible(true);
     }
+
 }
+
+
