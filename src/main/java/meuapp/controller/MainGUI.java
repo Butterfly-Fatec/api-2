@@ -31,8 +31,8 @@ public class MainGUI {
         });
     }
 
-
-    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService) throws IOException, InterruptedException {
+    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService)
+            throws IOException, InterruptedException {
         JFrame frame = new JFrame("ChatBot");
         frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +80,6 @@ public class MainGUI {
         languageLabel.setForeground(Color.WHITE);
         contentPane.add(languageLabel);
 
-
         ArrayList<String> listLLM = chooseLLMService.getListModels();
         JComboBox<String> llmOptions = new JComboBox<>(listLLM.toArray(new String[0]));
         llmOptions.setBounds(186, 290, 222, 50);
@@ -89,7 +88,6 @@ public class MainGUI {
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
             selectedLLM = (String) comboBox.getSelectedItem();
         });
-
 
         JButton startButton = new JButton("INICIAR");
         startButton.setBounds(190, 360, 220, 40);
@@ -129,5 +127,3 @@ public class MainGUI {
     }
 
 }
-
-
