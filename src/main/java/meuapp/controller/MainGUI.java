@@ -1,18 +1,14 @@
 package meuapp.controller;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
@@ -40,25 +36,31 @@ public class MainGUI {
         frame.setLocationRelativeTo(null);
 
         Container contentPane = frame.getContentPane();
-        contentPane.setBackground(new Color(47, 126, 182));
+        contentPane.setBackground(new Color(255, 255, 255, 204));
         contentPane.setLayout(null);
 
-        JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("src/main/resources/static/img/bot.png");
-        imageLabel.setIcon(imageIcon);
-        imageLabel.setBounds(260, 40, 100, 100);
-        contentPane.add(imageLabel);
+        JLabel imageLOGO = new JLabel();
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/static/img/logo.jpg");
+
+        Image image = imageIcon.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+
+        imageLOGO.setIcon(imageIcon);
+        imageLOGO.setBounds(252, 30, 90, 90);
+        frame.add(imageLOGO);
+
+
 
         JLabel welcomeLabel = new JLabel("Bem-vindo ao SQL Bot");
-        welcomeLabel.setBounds(191, 150, 220, 50);
+        welcomeLabel.setBounds(191, 130, 250, 50);
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        welcomeLabel.setForeground(Color.WHITE);
+        welcomeLabel.setForeground(new Color(0, 0, 0, 179));
         contentPane.add(welcomeLabel);
 
         JLabel schemaLabel = new JLabel("Selecionar Banco de Dados:");
-        schemaLabel.setBounds(191, 190, 220, 50);
+        schemaLabel.setBounds(191, 200, 220, 30);
+        schemaLabel.setForeground(new Color(0, 0, 0, 153));
         schemaLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        schemaLabel.setForeground(Color.WHITE);
         contentPane.add(schemaLabel);
 
         if (dataBaseService.getSchemas().isEmpty()) {
@@ -66,7 +68,10 @@ public class MainGUI {
         }
         ArrayList<String> listSchemas = dataBaseService.getSchemas();
         JComboBox<String> schemaOptions = new JComboBox<>(listSchemas.toArray(new String[0]));
-        schemaOptions.setBounds(186, 220, 222, 50);
+        schemaOptions.setBounds(186, 230, 222, 25);
+        schemaOptions.setOpaque(true);
+        schemaOptions.setBackground(Color.white);
+        schemaOptions.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPane.add(schemaOptions);
         schemaOptions.addActionListener(e -> {
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
@@ -75,14 +80,16 @@ public class MainGUI {
         });
 
         JLabel languageLabel = new JLabel("Selecionar LLM:");
-        languageLabel.setBounds(191, 260, 220, 50);
+        languageLabel.setBounds(191, 290, 220, 30);
+        languageLabel.setForeground(new Color(0, 0, 0, 153));
         languageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        languageLabel.setForeground(Color.WHITE);
         contentPane.add(languageLabel);
 
         ArrayList<String> listLLM = chooseLLMService.getListModels();
         JComboBox<String> llmOptions = new JComboBox<>(listLLM.toArray(new String[0]));
-        llmOptions.setBounds(186, 290, 222, 50);
+        llmOptions.setBounds(186, 320, 222, 25);
+        llmOptions.setOpaque(true);
+        llmOptions.setBackground(Color.white);
         contentPane.add(llmOptions);
         llmOptions.addActionListener(e -> {
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
@@ -90,8 +97,11 @@ public class MainGUI {
         });
 
         JButton startButton = new JButton("INICIAR");
-        startButton.setBounds(190, 360, 220, 40);
+        startButton.setBounds(190, 390, 220, 40);
         startButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        startButton.setForeground(new Color(0, 0, 0, 153));
+        startButton.setOpaque(true);
+        startButton.setBackground(Color.white);
         contentPane.add(startButton);
         startButton.addActionListener(e -> {
             if (selectedSchema == null) {
@@ -124,6 +134,18 @@ public class MainGUI {
             llmOptions.setSelectedItem(selectedLLM);
         }
         frame.setVisible(true);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    chooseLLMService.commandThree();
+                } catch (IOException | InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                frame.dispose();
+            }
+        });
     }
 
 }

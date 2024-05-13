@@ -1,6 +1,7 @@
 package meuapp.controller;
 
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,7 +11,6 @@ import meuapp.config.OutputStyles;
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
 import meuapp.service.LMStudioService;
-
 
 public class ChatGUI {
     private JFrame jFrame;
@@ -38,14 +38,21 @@ public class ChatGUI {
         jFrame.setLayout(null);
 
         Container contentPane = jFrame.getContentPane();
-        contentPane.setBackground(new Color(47, 126, 182));
+        contentPane.setBackground(Color.white);
         contentPane.setLayout(null);
 
         conversationHistory += "<b>Bot:</b> Olá, eu sou o SQL bot, faça uma pergunta:<br><br>";
 
+        Border roundedBorder = createRoundedBorder(10);
+
         input = new JTextField();
         input.setText("Faça uma pergunta...");
-        input.setBounds(10, 400, 470, 40);
+        input.setBounds(40, 400, 410, 40);
+        input.setBackground(new Color(255, 255, 255, 255));
+        input.setForeground(new Color(0, 0, 0, 128));
+        input.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(5, 5, 5, 5),
+                roundedBorder));
         input.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -70,20 +77,26 @@ public class ChatGUI {
         output.setContentType("text/html");
         output.setEditable(false);
         output.setEditorKit(editor);
+        output.setForeground(new Color(0, 0, 0, 102));
         output.setText("<html>" + conversationHistory + "</html>");
+        output.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(5, 5, 5, 5),
+                roundedBorder));
+
 
         JScrollPane scrollPane = new JScrollPane(output);
-        scrollPane.setBounds(10, 55, 580, 330);
+        scrollPane.setBounds(40, 55, 525, 330);
+        scrollPane.setBorder(null);
 
         JButton buttonSent = new JButton();
         buttonSent.setText("ENVIAR");
-        buttonSent.setBounds(490, 400, 100, 40);
+        buttonSent.setBounds(473, 400, 90, 36);
         buttonSent.setFont(new Font("Arial", Font.BOLD, 12));
         buttonSent.addActionListener(e -> sendMessage());
 
         JButton buttonReturn = new JButton();
         buttonReturn.setText("Voltar");
-        buttonReturn.setBounds(5,10, 80,35);
+        buttonReturn.setBounds(492,15, 70,36);
         buttonReturn.setFont(new Font("Arial", Font.BOLD, 14));
         buttonReturn.addActionListener(e -> {
             try {
@@ -93,6 +106,24 @@ public class ChatGUI {
                 throw new RuntimeException(ex);
             }
         });
+
+        JLabel nameDB = new JLabel();
+        nameDB.setText("Banco de dados:      " + this.selectionSchemaGUI);
+        nameDB.setBounds(44, 15, 500, 35);
+        nameDB.setFont(new Font("Arial", Font.BOLD, 14));
+        nameDB.setForeground(new Color(0, 0, 0, 179));
+        jFrame.add(nameDB);
+
+        JLabel imageOnlineDB = new JLabel();
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/static/img/online.png");
+
+        Image image = imageIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+
+        imageOnlineDB.setIcon(imageIcon);
+        imageOnlineDB.setBounds(160, 21, 25, 25);
+        jFrame.add(imageOnlineDB);
+
 
         jFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -137,6 +168,31 @@ public class ChatGUI {
         jFrame.setVisible(false);
         ChooseLLMService chooseLLMService = new ChooseLLMService();
         new MainGUI(dataBaseService, chooseLLMService);
+    }
+
+    private Border createRoundedBorder(int radius) {
+        return new CompoundBorder(new RoundedBorder(radius), BorderFactory.createEmptyBorder(0, 5, 0, 5));
+    }
+
+
+    class RoundedBorder implements Border {
+        private final int radius;
+
+        RoundedBorder(int radius) {
+            this.radius = radius;
+        }
+
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.radius, this.radius, this.radius, this.radius);
+        }
+
+        public boolean isBorderOpaque() {
+            return true;
+        }
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+        }
     }
 }
 
