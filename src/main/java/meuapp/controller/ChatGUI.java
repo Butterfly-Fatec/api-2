@@ -1,11 +1,32 @@
 package meuapp.controller;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.text.html.HTMLEditorKit;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.text.html.HTMLEditorKit;
 
 import meuapp.config.OutputStyles;
 import meuapp.service.ChooseLLMService;
@@ -83,20 +104,19 @@ public class ChatGUI {
                 BorderFactory.createEmptyBorder(5, 5, 5, 5),
                 roundedBorder));
 
-
         JScrollPane scrollPane = new JScrollPane(output);
         scrollPane.setBounds(40, 55, 525, 330);
         scrollPane.setBorder(null);
 
         JButton buttonSent = new JButton();
         buttonSent.setText("ENVIAR");
-        buttonSent.setBounds(473, 400, 90, 36);
+        buttonSent.setBounds(470, 400, 90, 36);
         buttonSent.setFont(new Font("Arial", Font.BOLD, 12));
         buttonSent.addActionListener(e -> sendMessage());
 
         JButton buttonReturn = new JButton();
         buttonReturn.setText("Voltar");
-        buttonReturn.setBounds(492,15, 70,36);
+        buttonReturn.setBounds(470, 15, 90, 36);
         buttonReturn.setFont(new Font("Arial", Font.BOLD, 14));
         buttonReturn.addActionListener(e -> {
             try {
@@ -124,7 +144,6 @@ public class ChatGUI {
         imageOnlineDB.setBounds(160, 21, 25, 25);
         jFrame.add(imageOnlineDB);
 
-
         jFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -136,7 +155,6 @@ public class ChatGUI {
                 jFrame.dispose();
             }
         });
-
 
         jFrame.add(input);
         jFrame.add(scrollPane);
@@ -174,7 +192,6 @@ public class ChatGUI {
         return new CompoundBorder(new RoundedBorder(radius), BorderFactory.createEmptyBorder(0, 5, 0, 5));
     }
 
-
     class RoundedBorder implements Border {
         private final int radius;
 
@@ -195,4 +212,3 @@ public class ChatGUI {
         }
     }
 }
-
