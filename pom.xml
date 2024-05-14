@@ -30,12 +30,8 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20210307</version>
+            <version>20240303</version>
         </dependency>
 
     </dependencies>
-
-
-
-
 </project>
