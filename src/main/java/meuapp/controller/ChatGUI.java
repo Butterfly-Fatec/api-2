@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -24,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.text.html.HTMLEditorKit;
@@ -41,12 +44,23 @@ public class ChatGUI {
     private JEditorPane output;
     private String conversationHistory = "";
     private final ChooseLLMService chooseLLMService;
+    private int processingCounter = 0;
+    private Timer timer;
 
     public ChatGUI(DataBaseService dataBaseService, String selectionSchemaGUI, ChooseLLMService chooseLLMService) {
         this.selectionSchemaGUI = selectionSchemaGUI;
         this.dataBaseService = dataBaseService;
         this.chooseLLMService = chooseLLMService;
+
         SwingUtilities.invokeLater(this::configureGUI);
+
+        // Inicializa o temporizador para alternar entre os diferentes "Processing"
+        timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateProcessingText();
+            }
+        });
     }
 
     public void configureGUI() {
@@ -166,20 +180,30 @@ public class ChatGUI {
 
     private void sendMessage() {
         String userQuestion = input.getText();
-        try {
-            this.conversationHistory += "<b>You:</b> " + userQuestion + "<br><br>";
 
-            LMStudioService lmStudioService = new LMStudioService(input, dataBaseService);
-            lmStudioService.connectionLMStudio();
-            lmStudioService.resultSQL(selectionSchemaGUI);
-            String response = lmStudioService.getOutput();
+        input.setText("");
 
-            this.conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
+        this.conversationHistory += "<b>You:</b> " + userQuestion + "<br><br>";
+        timer.start();
 
-            this.output.setText("<html>" + conversationHistory + "</html>");
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    LMStudioService lmStudioService = new LMStudioService(userQuestion, dataBaseService);
+                    lmStudioService.connectionLMStudio();
+                    lmStudioService.resultSQL(selectionSchemaGUI);
+                    String response = lmStudioService.getOutput();
+
+                    conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
+                    timer.stop();
+
+                    output.setText("<html>" + conversationHistory + "</html>");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }).start();
     }
 
     private void returnGUI() throws IOException, InterruptedException {
@@ -210,5 +234,12 @@ public class ChatGUI {
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
+    }
+
+    // Método para atualizar o texto de "Processing" com as diferentes pontuações
+    private void updateProcessingText() {
+        String[] processingTexts = { "Processando<b>.<b>", "Processando<b>..<b>", "Processando<b>...<b>" };
+        output.setText(conversationHistory + "<b>Bot: </b>" + processingTexts[processingCounter]);
+        processingCounter = (processingCounter + 1) % processingTexts.length;
     }
 }
