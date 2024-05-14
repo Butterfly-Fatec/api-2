@@ -1,14 +1,21 @@
 package meuapp.controller;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
@@ -114,7 +121,7 @@ public class MainGUI {
                 return;
             }
             try {
-                chooseLLMService.commandTwo(selectedLLM);
+                chooseLLMService.loadLMStudioModel(selectedLLM);
             } catch (InterruptedException | IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -139,7 +146,7 @@ public class MainGUI {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    chooseLLMService.commandThree();
+                    chooseLLMService.unloadLMStudioModel();
                 } catch (IOException | InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }

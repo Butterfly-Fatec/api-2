@@ -120,7 +120,7 @@ public class ChatGUI {
         buttonReturn.setFont(new Font("Arial", Font.BOLD, 14));
         buttonReturn.addActionListener(e -> {
             try {
-                chooseLLMService.commandThree();
+                chooseLLMService.unloadLMStudioModel();
                 returnGUI();
             } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
@@ -148,7 +148,7 @@ public class ChatGUI {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    chooseLLMService.commandThree();
+                    chooseLLMService.unloadLMStudioModel();
                 } catch (IOException | InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
