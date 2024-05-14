@@ -12,59 +12,47 @@ public class ChooseLLMService {
     private final ArrayList<String> listJson;
     private final ArrayList<String> listModels;
     private String schemaSelected;
-    private static final String COMMAND_JSON = "lms ls --json";
-    private static final String COMMAND_LOAD_MODEL = "lms load";
-    private static final String COMMAND_UNLOAD_MODEL = "lms unload";
 
     public ChooseLLMService() throws IOException, InterruptedException {
-        this.listJson = new ArrayList<>();
-        this.listModels = new ArrayList<>();
-        commandOne(COMMAND_JSON);
-        nameModel(listJson);
+        this.listJson = runCommand("lms ls --json");
+        this.listModels = getModelNames(listJson);
         this.schemaSelected = "";
     }
 
-    public void commandOne(String command) throws IOException, InterruptedException {
-
+    private ArrayList<String> runCommand(String command) throws IOException, InterruptedException {
         Process process = Runtime.getRuntime().exec(command);
-
+        ArrayList<String> result = new ArrayList<>();
+        
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
         while ((line = reader.readLine()) != null) {
-            this.listJson.add(line);
+            result.add(line);
         }
         reader.close();
-
         process.waitFor();
+        return result;
     }
 
-    public void commandTwo(String selectedLLM) throws IOException, InterruptedException {
+    public void loadLMStudioModel(String selectedLLM) throws IOException, InterruptedException {
         this.schemaSelected = selectedLLM;
-        Process process = Runtime.getRuntime().exec(COMMAND_LOAD_MODEL + " " + this.schemaSelected);
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            this.listJson.add(line);
-        }
-        reader.close();
-
-        process.waitFor();
+        runCommand("lms load " + selectedLLM);
     }
 
-    public void commandThree() throws IOException, InterruptedException {
-        Process process = Runtime.getRuntime().exec(COMMAND_UNLOAD_MODEL + " " + this.schemaSelected);
-        process.waitFor();
+    public void unloadLMStudioModel() throws IOException, InterruptedException {
+        runCommand("lms unload " + this.schemaSelected);
+        this.schemaSelected = "";
     }
 
-    public void nameModel(ArrayList<String> listJson) {
-        for (String result : listJson) {
-            JSONArray jsonArray = new JSONArray(result);
+    public final ArrayList<String> getModelNames(ArrayList<String> listJson)  {
+        ArrayList<String> result = new ArrayList<String>();
+        for (String res : listJson) {
+            JSONArray jsonArray = new JSONArray(res);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                listModels.add(jsonObject.getString("path"));
+                result.add(jsonObject.getString("path"));
             }
         }
+        return result;
     }
 
     public ArrayList<String> getListModels() {
