@@ -3,7 +3,7 @@ package meuapp.config;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class TestConnectionBD {
+public class TestConnectionDB {
     public static void main(String[] args) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         try {

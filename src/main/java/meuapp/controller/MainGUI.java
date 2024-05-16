@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import meuapp.config.ConnectionFactory;
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
 
@@ -24,19 +25,18 @@ public class MainGUI {
     private String selectedSchema;
     private String selectedLLM;
 
-    public MainGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, Object... Options) {
+    public MainGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, ConnectionFactory connectionFactory) {
         SwingUtilities.invokeLater(() -> {
             try {
                 chooseLLMService.unloadLMStudioModel();
-                configureGUI(dataBaseService, chooseLLMService, Options);
+                configureGUI(dataBaseService, chooseLLMService, connectionFactory);
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
-    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, Object... options)
-            throws IOException, InterruptedException {
+    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, ConnectionFactory connectionFactory) throws IOException, InterruptedException {
         JFrame frame = new JFrame("ChatBot");
         frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,17 +47,13 @@ public class MainGUI {
         contentPane.setBackground(new Color(255, 255, 255, 204));
         contentPane.setLayout(null);
 
-        JLabel imageLOGO = new JLabel();
+        JLabel logotipo = new JLabel();
         ImageIcon imageIcon = new ImageIcon("src/main/resources/static/img/logo.jpg");
-
         Image image = imageIcon.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
-
-        imageLOGO.setIcon(imageIcon);
-        imageLOGO.setBounds(252, 30, 90, 90);
-        frame.add(imageLOGO);
-
-
+        logotipo.setIcon(imageIcon);
+        logotipo.setBounds(252, 30, 90, 90);
+        frame.add(logotipo);
 
         JLabel welcomeLabel = new JLabel("Bem-vindo ao SQL Bot");
         welcomeLabel.setBounds(191, 130, 250, 50);
@@ -71,10 +67,7 @@ public class MainGUI {
         schemaLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPane.add(schemaLabel);
 
-        if (dataBaseService.getSchemas().isEmpty()) {
-            dataBaseService.FilterSchemas();
-        }
-        ArrayList<String> listSchemas = dataBaseService.getSchemas();
+        ArrayList<String> listSchemas = DataBaseService.filterSchemas(connectionFactory);
         JComboBox<String> schemaOptions = new JComboBox<>(listSchemas.toArray(new String[0]));
         schemaOptions.setBounds(186, 230, 222, 25);
         schemaOptions.setOpaque(true);
@@ -82,9 +75,10 @@ public class MainGUI {
         schemaOptions.setFont(new Font("Arial", Font.PLAIN, 16));
         contentPane.add(schemaOptions);
         schemaOptions.addActionListener(e -> {
+            @SuppressWarnings("unchecked")
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
             selectedSchema = (String) comboBox.getSelectedItem();
-            dataBaseService.DataSchema(selectedSchema);
+            dataBaseService.dataSchema(selectedSchema, new ConnectionFactory());
         });
 
         JLabel languageLabel = new JLabel("Selecionar LLM:");
@@ -100,6 +94,7 @@ public class MainGUI {
         llmOptions.setBackground(Color.white);
         contentPane.add(llmOptions);
         llmOptions.addActionListener(e -> {
+            @SuppressWarnings("unchecked")
             JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
             selectedLLM = (String) comboBox.getSelectedItem();
         });
@@ -128,13 +123,13 @@ public class MainGUI {
             }
 
             frame.dispose();
-            new ChatGUI(dataBaseService, selectedSchema, chooseLLMService);
+            new ChatGUI(dataBaseService, selectedSchema, chooseLLMService, connectionFactory);
         });
 
         selectedSchema = listSchemas.isEmpty() ? "" : listSchemas.get(0);
 
         if (!selectedSchema.isEmpty()) {
-            dataBaseService.DataSchema(selectedSchema);
+            dataBaseService.dataSchema(selectedSchema, new ConnectionFactory());
         }
 
         if (!listLLM.isEmpty()) {

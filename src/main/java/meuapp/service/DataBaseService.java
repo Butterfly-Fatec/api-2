@@ -6,17 +6,14 @@ import java.sql.*;
 import meuapp.config.ConnectionFactory;
 
 public class DataBaseService {
-    private final ArrayList<String> listSchemas;
     private final StringBuilder dataSchemas;
-    private final ConnectionFactory connectionFactory;
 
     public DataBaseService() {
-        this.listSchemas= new ArrayList<>();
         this.dataSchemas = new StringBuilder();
-        this.connectionFactory = new ConnectionFactory();
     }
 
-    public void FilterSchemas() {
+    public static ArrayList<String> filterSchemas(ConnectionFactory connectionFactory) {
+        ArrayList<String> listSchema = new ArrayList<>();
         try (Connection connection = connectionFactory.getConnection()) {
             DatabaseMetaData metaData = connection.getMetaData();
             ResultSet resultSets = metaData.getCatalogs();
@@ -26,16 +23,17 @@ public class DataBaseService {
                         !schemaName.equalsIgnoreCase("mysql") &&
                         !schemaName.equalsIgnoreCase("performance_schema") &&
                         !schemaName.equalsIgnoreCase("sys")) {
-                    this.listSchemas.add(schemaName);
+                    listSchema.add(schemaName);
                 }
             }
             resultSets.close();
         } catch (SQLException e) {
             System.out.println("Error FilterSchemas: " + e.getMessage());
         }
+        return listSchema;
     }
 
-    public void DataSchema(String nameSchema) {
+    public void dataSchema(String nameSchema, ConnectionFactory connectionFactory) {
         ClearSchemas();
         try (Connection conn = DriverManager.getConnection(connectionFactory.getURL() + "/" + nameSchema, connectionFactory.getUSER(), connectionFactory.getPASSWORD())) {
             String query = "SELECT * FROM information_schema.tables WHERE table_schema = ?";
@@ -65,9 +63,6 @@ public class DataBaseService {
 
     public void ClearSchemas() {
         this.dataSchemas.delete(0, this.dataSchemas.length());
-    }
-    public ArrayList<String> getSchemas() {
-       return this.listSchemas;
     }
     public StringBuilder getDataSchemas() {
         return this.dataSchemas;

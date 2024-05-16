@@ -12,18 +12,10 @@ import dev.langchain4j.model.localai.LocalAiChatModel;
 import meuapp.config.ConnectionFactory;
 
 public class LMStudioService {
-    private final ConnectionFactory connectionFactory;
-    private static final String URL = "http://localhost:1234/v1/";
-    private final DataBaseService dataBaseService;
 
-    public LMStudioService(String input, DataBaseService dataBaseService) {
-        this.dataBaseService = dataBaseService;
-        this.connectionFactory = new ConnectionFactory();
-    }
-
-    public String sendLMStudioQuery(String question) throws IOException {
+    public static String sendLMStudioQuery(String question, DataBaseService dataBaseService) throws IOException {
         ChatLanguageModel model = LocalAiChatModel.builder()
-                .baseUrl(URL)
+                .baseUrl("http://localhost:1234/v1/")
                 .modelName("loaded")
                 .temperature(0.7)
                 .build();
@@ -45,7 +37,7 @@ public class LMStudioService {
         return model.generate(instructions);
     }
 
-    public String resultSQL(String selectedSchema, String query) {
+    public static String resultSQL(String selectedSchema, String query, ConnectionFactory connectionFactory) {
         try {
             Connection connection = DriverManager.getConnection(connectionFactory.getURL() + "/" + selectedSchema,
                     connectionFactory.getUSER(), connectionFactory.getPASSWORD());

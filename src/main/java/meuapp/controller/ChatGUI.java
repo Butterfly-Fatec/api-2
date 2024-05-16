@@ -7,8 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -31,6 +30,7 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.text.html.HTMLEditorKit;
 
+import meuapp.config.ConnectionFactory;
 import meuapp.config.OutputStyles;
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
@@ -38,6 +38,7 @@ import meuapp.service.LMStudioService;
 
 public class ChatGUI {
     private JFrame jFrame;
+    private final ConnectionFactory connectionFactory;
     private final DataBaseService dataBaseService;
     private final String selectionSchemaGUI;
     private JTextField input;
@@ -45,22 +46,18 @@ public class ChatGUI {
     private String conversationHistory = "";
     private final ChooseLLMService chooseLLMService;
     private int processingCounter = 0;
-    private Timer timer;
+    private final Timer timer;
 
-    public ChatGUI(DataBaseService dataBaseService, String selectionSchemaGUI, ChooseLLMService chooseLLMService) {
+    public ChatGUI(DataBaseService dataBaseService, String selectionSchemaGUI, ChooseLLMService chooseLLMService, ConnectionFactory connectionFactory) {
         this.selectionSchemaGUI = selectionSchemaGUI;
         this.dataBaseService = dataBaseService;
         this.chooseLLMService = chooseLLMService;
+        this.connectionFactory = connectionFactory;
 
         SwingUtilities.invokeLater(this::configureGUI);
 
         // Inicializa o temporizador para alternar entre os diferentes "Processing"
-        timer = new Timer(500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateProcessingText();
-            }
-        });
+        timer = new Timer(500, e -> updateProcessingText());
     }
 
     public void configureGUI() {
@@ -78,7 +75,7 @@ public class ChatGUI {
 
         conversationHistory += "<b>Bot:</b> Olá, eu sou o SQL bot, faça uma pergunta:<br><br>";
 
-        Border roundedBorder = createRoundedBorder(10);
+        Border roundedBorder = createRoundedBorder();
 
         input = new JTextField();
         input.setText("Faça uma pergunta...");
@@ -174,7 +171,7 @@ public class ChatGUI {
         jFrame.add(scrollPane);
         jFrame.add(buttonSent);
         jFrame.add(buttonReturn);
-        dataBaseService.DataSchema(selectionSchemaGUI);
+        dataBaseService.dataSchema(selectionSchemaGUI, connectionFactory);
         jFrame.setVisible(true);
     }
 
@@ -186,22 +183,15 @@ public class ChatGUI {
         this.conversationHistory += "<b>You:</b> " + userQuestion + "<br><br>";
         timer.start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    LMStudioService lmStudioService = new LMStudioService(userQuestion, dataBaseService);
-                    // 
-                    String response = lmStudioService.resultSQL(selectionSchemaGUI, lmStudioService.sendLMStudioQuery(userQuestion));
-                    // String response = lmStudioService.getOutput();
+        new Thread(() -> {
+            try {
+                String response = LMStudioService.resultSQL(selectionSchemaGUI, LMStudioService.sendLMStudioQuery(userQuestion, dataBaseService), new ConnectionFactory());
+                conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
+                timer.stop();
 
-                    conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
-                    timer.stop();
-
-                    output.setText("<html>" + conversationHistory + "</html>");
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                output.setText("<html>" + conversationHistory + "</html>");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         }).start();
     }
@@ -209,14 +199,14 @@ public class ChatGUI {
     private void returnGUI() throws IOException, InterruptedException {
         jFrame.setVisible(false);
         ChooseLLMService chooseLLMService = new ChooseLLMService();
-        new MainGUI(dataBaseService, chooseLLMService);
+        new MainGUI(dataBaseService,chooseLLMService,connectionFactory);
     }
 
-    private Border createRoundedBorder(int radius) {
-        return new CompoundBorder(new RoundedBorder(radius), BorderFactory.createEmptyBorder(0, 5, 0, 5));
+    private Border createRoundedBorder() {
+        return new CompoundBorder(new RoundedBorder(10), BorderFactory.createEmptyBorder(0, 5, 0, 5));
     }
 
-    class RoundedBorder implements Border {
+    static class RoundedBorder implements Border {
         private final int radius;
 
         RoundedBorder(int radius) {

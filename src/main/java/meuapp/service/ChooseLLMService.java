@@ -9,14 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ChooseLLMService {
-    private final ArrayList<String> listJson;
     private final ArrayList<String> listModels;
-    private String schemaSelected;
 
     public ChooseLLMService() throws IOException, InterruptedException {
-        this.listJson = runCommand("lms ls --json");
+        ArrayList<String> listJson = runCommand("lms ls --json");
         this.listModels = getModelNames(listJson);
-        this.schemaSelected = "";
     }
 
     private ArrayList<String> runCommand(String command) throws IOException, InterruptedException {
@@ -34,17 +31,15 @@ public class ChooseLLMService {
     }
 
     public void loadLMStudioModel(String selectedLLM) throws IOException, InterruptedException {
-        this.schemaSelected = selectedLLM;
         runCommand("lms load " + selectedLLM + " --identifier loaded");
     }
 
     public void unloadLMStudioModel() throws IOException, InterruptedException {
         runCommand("lms unload loaded");
-        this.schemaSelected = "";
     }
 
-    public final ArrayList<String> getModelNames(ArrayList<String> listJson)  {
-        ArrayList<String> result = new ArrayList<String>();
+    public static ArrayList<String> getModelNames(ArrayList<String> listJson)  {
+        ArrayList<String> result = new ArrayList<>();
         for (String res : listJson) {
             JSONArray jsonArray = new JSONArray(res);
             for (int i = 0; i < jsonArray.length(); i++) {
