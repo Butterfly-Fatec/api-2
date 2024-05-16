@@ -191,9 +191,9 @@ public class ChatGUI {
             public void run() {
                 try {
                     LMStudioService lmStudioService = new LMStudioService(userQuestion, dataBaseService);
-                    lmStudioService.connectionLMStudio();
-                    lmStudioService.resultSQL(selectionSchemaGUI);
-                    String response = lmStudioService.getOutput();
+                    // 
+                    String response = lmStudioService.resultSQL(selectionSchemaGUI, lmStudioService.sendLMStudioQuery(userQuestion));
+                    // String response = lmStudioService.getOutput();
 
                     conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
                     timer.stop();

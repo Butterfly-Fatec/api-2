@@ -35,11 +35,11 @@ public class ChooseLLMService {
 
     public void loadLMStudioModel(String selectedLLM) throws IOException, InterruptedException {
         this.schemaSelected = selectedLLM;
-        runCommand("lms load " + selectedLLM);
+        runCommand("lms load " + selectedLLM + " --identifier loaded");
     }
 
     public void unloadLMStudioModel() throws IOException, InterruptedException {
-        runCommand("lms unload " + this.schemaSelected);
+        runCommand("lms unload loaded");
         this.schemaSelected = "";
     }
 
@@ -49,7 +49,7 @@ public class ChooseLLMService {
             JSONArray jsonArray = new JSONArray(res);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                result.add(jsonObject.getString("path"));
+                result.add(jsonObject.getString("path").split("/")[2].replace(".gguf", ""));
             }
         }
         return result;

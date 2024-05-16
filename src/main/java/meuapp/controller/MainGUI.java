@@ -24,17 +24,18 @@ public class MainGUI {
     private String selectedSchema;
     private String selectedLLM;
 
-    public MainGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService) {
+    public MainGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, Object... Options) {
         SwingUtilities.invokeLater(() -> {
             try {
-                configureGUI(dataBaseService, chooseLLMService);
+                chooseLLMService.unloadLMStudioModel();
+                configureGUI(dataBaseService, chooseLLMService, Options);
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
-    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService)
+    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, Object... options)
             throws IOException, InterruptedException {
         JFrame frame = new JFrame("ChatBot");
         frame.setSize(600, 500);
