@@ -1,6 +1,11 @@
-![](src/main/resources/static/img/SQLBot.png)
-<h1 align="left">SQL Chat Bot </h1>
+<div align="center">
+    <img id="logo" src="https://github.com/Butterfly-Fatec/api-2/assets/142838760/0ddc47e4-5047-4159-b432-3db8b8d7ec8d" alt="Novo logo Butterfly" style="width: 1000px;">
+</div>
 
+<h1 align="center">
+ 
+ <p align="left">SQL Chat Bot</p>
+</h1>
 O projeto visa criar uma aplicação que permite acessar informações de um banco de dados MySQL usando exclusivamente a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
 
 ## Requisitos Funcionais
