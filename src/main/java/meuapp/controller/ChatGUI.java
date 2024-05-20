@@ -56,7 +56,6 @@ public class ChatGUI {
 
         SwingUtilities.invokeLater(this::configureGUI);
 
-        // Inicializa o temporizador para alternar entre os diferentes "Processing"
         timer = new Timer(500, e -> updateProcessingText());
     }
 
@@ -226,7 +225,7 @@ public class ChatGUI {
         }
     }
 
-    // Método para atualizar o texto de "Processing" com as diferentes pontuações
+
     private void updateProcessingText() {
         String[] processingTexts = { "Processando<b>.<b>", "Processando<b>..<b>", "Processando<b>...<b>" };
         output.setText(conversationHistory + "<b>Bot: </b>" + processingTexts[processingCounter]);

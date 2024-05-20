@@ -1,11 +1,7 @@
-<div align="center">
-    <img id="logo" src="https://github.com/Butterfly-Fatec/api-2/assets/142838760/0ddc47e4-5047-4159-b432-3db8b8d7ec8d" alt="Novo logo Butterfly" style="width: 1000px;">
-</div>
+![Descrição do GIF](src/main/resources/static/img/buttlerfly_logo.jpg)
 
-<h1 align="center">
- 
- <p align="left">SQL Chat Bot</p>
-</h1>
+# <a name="topo"></a>SQL Chat Bot
+
 O projeto visa criar uma aplicação que permite acessar informações de um banco de dados MySQL usando exclusivamente a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
 
 ## Requisitos Funcionais
@@ -24,19 +20,28 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 <li>Usabilidade</li>
 </ul>
 
+## Sprint 2
+![GIF sprint 2](src/main/resources/static/gifs/sprint2.gif)
+
+## Sprint 3
+![GIF sprint 3](src/main/resources/static/gifs/sprint3.gif)
+
+## Sprint 4
+![GIF sprint 4](src/main/resources/static/gifs/sprint4.gif)
+
 ## Backlog
-| Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
-|------|------------|------------|------------|--------|-----------------------|------------------------|
-| 1   | ALTA       | Eu, como usuário, quero usar uma interface do usuário finalizada para ter uma experiência consistente e intuitiva ao navegar e interagir com o sistema. | 5 | 2 | RF2 | A interface do usuário deve estar finalizada e proporcionar uma experiência consistente e intuitiva. |
-| 2   | ALTA       | Eu, como usuário, quero inserir perguntas na interface do sistema em linguagem natural para facilitar a interação | 3 | 2 | RF2 | A interface deve permitir a inserção de perguntas em linguagem natural de forma clara e precisa. |
-| 3   | ALTA       | Eu, como desenvolvedor, quero converter perguntas em linguagem natural para consultas SQL para executar no banco de dados | 13 | 2 | RF3 | O sistema deve converter perguntas em linguagem natural em consultas SQL corretas e eficientes. |
-| 4  | ALTA       | Eu, como desenvolvedor, quero executar comandos SQL no banco de dados para obter resultados relevantes para o usuário | 8 | 2 | RF4 | O sistema deve ser capaz de executar comandos SQL no banco de dados de forma segura e eficiente. |
-| 5  | ALTA       | Eu, como usuário, quero ver os resultados das consultas exibidos na tela para tomar decisões com base neles | 7 | 2 | RF5 | Os resultados das consultas devem ser exibidos de forma clara e organizada na tela. |
-| 6  | MÉDIA      | Eu, como usuário, quero ter a capacidade de alterar o banco de dados que está sendo consultado para explorar diferentes conjuntos de dados | 10 | 3 | RF1 | O sistema deve permitir que o usuário alterne entre diferentes bancos de dados de forma fácil e intuitiva. |
-| 7 | BAIXA      | Eu, como usuário, quero que a interface do sistema seja melhorada para tornar a interação mais intuitiva e agradável | 5 | 3 | RF2 | As melhorias na interface do sistema devem resultar em uma interação mais intuitiva e agradável para o usuário. |
-| 8 | MÉDIA      | Eu, como usuário, quero poder selecionar o modelo de linguagem que está sendo usado para fazer as consultas para personalizar a experiência | 10 | 4 | RF3 | O sistema deve permitir que o usuário selecione entre diferentes modelos de linguagem para realizar consultas de acordo com suas preferências. |
-| 9  | BAIXA      | Eu, como usuário, quero poder ler o manual do aplicativo para entender suas funcionalidades e como usá-lo | 5 | 4 | RNF1 | O manual do aplicativo deve estar disponível de forma clara e acessível para o usuário. |
-| 10  | BAIXA      | Eu, como usuário, quero poder ler o guia de instalação para o funcionamento do aplicativo para garantir uma instalação correta | 4 | 4 | RNF2 | O guia de instalação deve fornecer instruções claras e precisas para uma instalação correta do aplicativo. |
+| Rank | Prioridade | User Story                                                                                                                                              | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação                                                                                                                          |
+|------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1    | ALTA       | Eu, como usuário, quero usar uma interface do usuário finalizada para ter uma experiência consistente e intuitiva ao navegar e interagir com o sistema. | 5          | 2      | RF2                   | A interface do usuário deve estar finalizada e proporcionar uma experiência consistente e intuitiva.                                           |
+| 2    | ALTA       | Eu, como usuário, quero inserir perguntas na interface do sistema em linguagem natural para facilitar a interação                                       | 3          | 2      | RF2                   | A interface deve permitir a inserção de perguntas em linguagem natural de forma clara e precisa.                                               |
+| 3    | ALTA       | Eu, como desenvolvedor, quero converter perguntas em linguagem natural para consultas SQL para executar no banco de dados                               | 13         | 2      | RF3                   | O sistema deve converter perguntas em linguagem natural em consultas SQL corretas e eficientes.                                                |
+| 4    | ALTA       | Eu, como desenvolvedor, quero executar comandos SQL no banco de dados para obter resultados relevantes para o usuário                                   | 8          | 2      | RF4                   | O sistema deve ser capaz de executar comandos SQL no banco de dados de forma segura e eficiente.                                               |
+| 5    | ALTA       | Eu, como usuário, quero ver os resultados das consultas exibidos na tela para tomar decisões com base neles                                             | 7          | 2      | RF5                   | Os resultados das consultas devem ser exibidos de forma clara e organizada na tela.                                                            |
+| 6    | MÉDIA      | Eu, como usuário, quero ter a capacidade de alterar o banco de dados que está sendo consultado para explorar diferentes conjuntos de dados              | 10         | 3      | RF1                   | O sistema deve permitir que o usuário alterne entre diferentes bancos de dados de forma fácil e intuitiva.                                     |
+| 7    | BAIXA      | Eu, como usuário, quero que a interface do sistema seja melhorada para tornar a interação mais intuitiva e agradável                                    | 5          | 3      | RF2                   | As melhorias na interface do sistema devem resultar em uma interação mais intuitiva e agradável para o usuário.                                |
+| 8    | MÉDIA      | Eu, como usuário, quero poder selecionar o modelo de linguagem que está sendo usado para fazer as consultas para personalizar a experiência             | 10         | 4      | RF3                   | O sistema deve permitir que o usuário selecione entre diferentes modelos de linguagem para realizar consultas de acordo com suas preferências. |
+| 9    | BAIXA      | Eu, como usuário, quero poder ler o manual do aplicativo para entender suas funcionalidades e como usá-lo                                               | 5          | 4      | RNF1                  | O manual do aplicativo deve estar disponível de forma clara e acessível para o usuário.                                                        |
+| 10   | BAIXA      | Eu, como usuário, quero poder ler o guia de instalação para o funcionamento do aplicativo para garantir uma instalação correta                          | 4          | 4      | RNF2                  | O guia de instalação deve fornecer instruções claras e precisas para uma instalação correta do aplicativo.                                     |
 
 ## MVP
 
@@ -86,14 +91,14 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 
 Somos alunos do 2° semestre do curso de Análise e Desenvolvimento de Sistemas da instituição de ensino Fatec Prof° Jessen Vidal de São José dos Campos.
 
-| Função         | Nome                        | GitHub                                                                                                                               | LinkedIn                                                                                                                                    |
-|:--------------:|:---------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------:|
-| Product Owner  | Daniel Sendreti Broder      | <a href="https://github.com/d-broder"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>    | <a href="https://www.linkedin.com/in/danielbroder/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>        |
-| Scrum Master   | Guilherme Cleyton Pereira   | <a href="https://github.com/gui863"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>     | <a href="https://www.linkedin.com/in/gu%C3%ADlherm-p%C3%AAreira-7993aa7a/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                    |
-| Dev Team       | Gabriel Carvalho Silva      | <a href="https://github.com/Gabriecarvalho"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a> | <a href="https://www.linkedin.com/in/gabriel-carvalho-30598b292/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a> |
-| Dev Team       | Gabriel Vasconcelos Ferreira| <a href="https://github.com/gabrielvascf"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  | <a href="https://www.linkedin.com/in/gabriel-vasconcelos-255979262?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                    |
-| Dev Team       | Paloma Lima da Silva        | <a href="https://github.com/palomalima22"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>    | <a href="https://www.linkedin.com/in/paloma-lima-b2b00b201/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a> |
-| Dev Team       | Victor Herculano Godoy      | <a href="https://github.com/victorrgodoy"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  | <a href="https://www.linkedin.com/in/victorgodoy-/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>        |
+|    Função     |             Nome             |                                                                           GitHub                                                                            |                                                                                                                              LinkedIn                                                                                                                               |
+|:-------------:|:----------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Product Owner |    Daniel Sendreti Broder    |    <a href="https://github.com/d-broder"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>    |                                                  <a href="https://www.linkedin.com/in/danielbroder/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                                                   |
+| Scrum Master  |  Guilherme Cleyton Pereira   |     <a href="https://github.com/gui863"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>     |                                       <a href="https://www.linkedin.com/in/gu%C3%ADlherm-p%C3%AAreira-7993aa7a/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                                       |
+|   Dev Team    |    Gabriel Carvalho Silva    | <a href="https://github.com/Gabriecarvalho"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a> |                                           <a href="https://www.linkedin.com/in/gabriel-carvalho-30598b292/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                                            |
+|   Dev Team    | Gabriel Vasconcelos Ferreira |  <a href="https://github.com/gabrielvascf"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  | <a href="https://www.linkedin.com/in/gabriel-vasconcelos-255979262?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a> |
+|   Dev Team    |     Paloma Lima da Silva     |  <a href="https://github.com/palomalima22"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  |                                              <a href="https://www.linkedin.com/in/paloma-lima-b2b00b201/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                                              |
+|   Dev Team    |    Victor Herculano Godoy    |  <a href="https://github.com/victorrgodoy"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  |                                                  <a href="https://www.linkedin.com/in/victorgodoy-/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                                                   |
 
 [Voltar ao topo](#topo)
 
