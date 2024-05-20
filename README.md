@@ -1,10 +1,10 @@
-![Descrição do GIF](src/main/resources/static/img/buttlerfly_logo.jpg)
+![Descrição do GIF](src/main/resources/static/img/SQLBot.png)
 
 # <a name="topo"></a>SQL Chat Bot
 
 O projeto visa criar uma aplicação que permite acessar informações de um banco de dados MySQL usando exclusivamente a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
 
-## Requisitos Funcionais
+### Requisitos Funcionais
 <ul>
 <li>Permitir ao usuário selecionar um banco de dados</li>
 <li>Criação de uma tela para receber uma consulta escrita em linguagem natural</li>
@@ -13,21 +13,45 @@ O projeto visa criar uma aplicação que permite acessar informações de um ban
 <li>Exibição dos resultados</li>
 </ul>
 
-## Requisitos Não Funcionais
+### Requisitos Não Funcionais
 <ul>
 <li>Manual do Usuário (GitHub)</li>
 <li>Guia de instalação (GitHub)</li>
 <li>Usabilidade</li>
 </ul>
 
-## Sprint 2
-![GIF sprint 2](src/main/resources/static/gifs/sprint2.gif)
 
-## Sprint 3
-![GIF sprint 3](src/main/resources/static/gifs/sprint3.gif)
+### Características
+<ul>
+<li>Interface Gráfica projetada para proporcionar uma experiência de usuário intuitiva, facilitando a utilização das funcionalidades disponíveis.</li>
+<li>Compatibilidade com LLM SQLCoder: o software demonstra um excelente desempenho ao trabalhar em conjunto com uma variedade de modelos de línguagem SQLCoder.</li>
+<li>Os usuários conseguem selecionar e integrar facilmente qualquer banco de dados disponível em suas máquinas.</li>
+<li>O software possui a capacidade de alterar para qualquer modelo de línguagem instalado no computador.</li>
+<li>Testes Realizados em Português (BR) e Inglês (EUA):</li>
+</ul>
 
-## Sprint 4
-![GIF sprint 4](src/main/resources/static/gifs/sprint4.gif)
+### MVP
+Demonstração do funcionamento geral do SQL Bot:
+
+
+<img src="src/main/resources/static/gifs/sprint4.gif" alt="GIF sprint 4" width="400"/>
+
+### Chat Funcional (Sprint 2)
+Na Sprint 2, o chat se tornou funcional para pesquisas, onde o sistema recebe perguntas em linguagem natural e retorna respostas em forma de tabela com todos os dados relevantes.
+
+<img src="src/main/resources/static/img/sprint2.png" alt="img sprint 2" width="400"/>
+
+### Alteração do Banco de Dados (Sprint 3)
+
+Na Sprint 3, foi incluído a função de alteração do banco de dados, permitindo realizar consultas em qualquer banco de dados que o usuário possuir.
+
+<img src="src/main/resources/static/img/sprint3.png" alt="img sprint 3" width="400"/>
+
+### Alteração do Modelo de Línguagem (Sprint 4)
+
+Na Sprint 4, adicionamos a função de alterar qualquer modelo de linguagem que o usuário possuir, proporcionando uma personalização avançada.
+
+<img src="src/main/resources/static/img/sprint4.png" alt="img sprint 4" width="400"/>
 
 ## Backlog
 | Rank | Prioridade | User Story                                                                                                                                              | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação                                                                                                                          |
