@@ -1,55 +1,54 @@
-![Descrição do GIF](src/main/resources/static/img/SQLBot.png)
-
 # <a name="topo"></a>SQL Chat Bot
+
+![Descrição do GIF](src/main/resources/static/img/SQLBot.png)
 
 O projeto visa criar uma aplicação que permite acessar informações de um banco de dados MySQL usando exclusivamente a linguagem natural. A aplicação deve ser capaz de interpretar a linguagem natural e traduzi-la para uma consulta SQL, executando-a e retornando o resultado ao usuário.
 
 ### Requisitos Funcionais
 <ul>
-<li>Permitir ao usuário selecionar um banco de dados</li>
-<li>Criação de uma tela para receber uma consulta escrita em linguagem natural</li>
-<li>Conversão da linguagem natural em código SQL</li>
-<li>Execução do comando SQL gerado no banco de dados</li>
-<li>Exibição dos resultados</li>
+<li>RF1 - Permitir ao usuário selecionar um banco de dados</li>
+<li>RF2 - Criação de uma tela para receber uma consulta escrita em linguagem natural</li>
+<li>RF3 - Conversão da linguagem natural em código SQL</li>
+<li>RF4 - Execução do comando SQL gerado no banco de dados</li>
+<li>RF5 - Exibição dos resultados</li>
 </ul>
 
 ### Requisitos Não Funcionais
 <ul>
-<li>Manual do Usuário (GitHub)</li>
-<li>Guia de instalação (GitHub)</li>
-<li>Usabilidade</li>
+<li>RNF1 - Manual do Usuário (GitHub)</li>
+<li>RNF2 - Guia de instalação (GitHub)</li>
+<li>RNF3 - Usabilidade</li>
 </ul>
 
 
 ### Características
 <ul>
 <li>Interface Gráfica projetada para proporcionar uma experiência de usuário intuitiva, facilitando a utilização das funcionalidades disponíveis.</li>
-<li>Compatibilidade com LLM SQLCoder: o software demonstra um excelente desempenho ao trabalhar em conjunto com uma variedade de modelos de línguagem SQLCoder.</li>
+<li>Compatibilidade com LLM SQLCoder: o software demonstra um excelente desempenho ao trabalhar em conjunto com uma variedade de modelos de linguagem SQLCoder.</li>
 <li>Os usuários conseguem selecionar e integrar facilmente qualquer banco de dados disponível em suas máquinas.</li>
-<li>O software possui a capacidade de alterar para qualquer modelo de línguagem instalado no computador.</li>
-<li>Testes Realizados em Português (BR) e Inglês (EUA):</li>
+<li>O software possui a capacidade de alterar para qualquer modelo de linguagem instalado no computador.</li>
+<li>Testes realizados em Português (BR) e Inglês (EUA)</li>
 </ul>
 
-### MVP
+## Demonstração
 Demonstração do funcionamento geral do SQL Bot:
-
 
 <img src="src/main/resources/static/gifs/sprint4.gif" alt="GIF sprint 4" width="400"/>
 
 ### Chat Funcional (Sprint 2)
-Na Sprint 2, o chat se tornou funcional para pesquisas, onde o sistema recebe perguntas em linguagem natural e retorna respostas em forma de tabela com todos os dados relevantes.
+Na Sprint 2, o chat passou a ser funcional para pesquisas, permitindo que o sistema receba perguntas em linguagem natural e retorne respostas em formato de tabela, contendo todos os dados relevantes.
 
 <img src="src/main/resources/static/img/sprint2.png" alt="img sprint 2" width="400"/>
 
 ### Alteração do Banco de Dados (Sprint 3)
 
-Na Sprint 3, foi incluído a função de alteração do banco de dados, permitindo realizar consultas em qualquer banco de dados que o usuário possuir.
+Na Sprint 3, foi incluída a função de modificação do banco de dados, permitindo a realização de consultas em qualquer banco de dados que o usuário possua.
 
 <img src="src/main/resources/static/img/sprint3.png" alt="img sprint 3" width="400"/>
 
-### Alteração do Modelo de Línguagem (Sprint 4)
+### Alteração do Modelo de Linguagem (Sprint 4)
 
-Na Sprint 4, adicionamos a função de alterar qualquer modelo de linguagem que o usuário possuir, proporcionando uma personalização avançada.
+Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem que o usuário possua, proporcionando uma personalização avançada.
 
 <img src="src/main/resources/static/img/sprint4.png" alt="img sprint 4" width="400"/>
 
@@ -87,7 +86,7 @@ Na Sprint 4, adicionamos a função de alterar qualquer modelo de linguagem que 
 
 <p>
    <img align="left" title="vscode" height="30px" src="https://hermes.digitalinnovation.one/articles/cover/14f7ca38-af7d-4b21-a0d9-c581c2611e9b.png"/>
-   &nbsp; IntelliJ IDEA
+   &nbsp; IntelliJ - IDEA
  </p>
 
 <p>
@@ -107,7 +106,7 @@ Na Sprint 4, adicionamos a função de alterar qualquer modelo de linguagem que 
 
  <p>
    <img align="left" title="ollama" height="30px" src="https://pbs.twimg.com/profile_images/1755060270173429760/4WVc54_p_400x400.jpg"/>
-   &nbsp; LM Studio
+   &nbsp; LM Studio - Executor de modelos de linguagem
  </p>
 
 
