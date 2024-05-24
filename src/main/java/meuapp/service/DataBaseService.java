@@ -1,9 +1,10 @@
 package meuapp.service;
 
 import java.util.ArrayList;
-import java.sql.*;
 
-import meuapp.config.ConnectionFactory;
+import meuapp.factory.ConnectionFactory;
+
+import java.sql.*;
 
 public class DataBaseService {
     private final StringBuilder dataSchemas;
@@ -35,7 +36,8 @@ public class DataBaseService {
 
     public void dataSchema(String nameSchema, ConnectionFactory connectionFactory) {
         ClearSchemas();
-        try (Connection conn = DriverManager.getConnection(connectionFactory.getURL() + "/" + nameSchema, connectionFactory.getUSER(), connectionFactory.getPASSWORD())) {
+        try (Connection conn = DriverManager.getConnection(connectionFactory.getURL() + "/" + nameSchema,
+                connectionFactory.getUSER(), connectionFactory.getPASSWORD())) {
             String query = "SELECT * FROM information_schema.tables WHERE table_schema = ?";
             try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
                 preparedStatement.setString(1, nameSchema);
@@ -64,6 +66,7 @@ public class DataBaseService {
     public void ClearSchemas() {
         this.dataSchemas.delete(0, this.dataSchemas.length());
     }
+
     public StringBuilder getDataSchemas() {
         return this.dataSchemas;
     }

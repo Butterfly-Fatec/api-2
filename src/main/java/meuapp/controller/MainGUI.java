@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import meuapp.config.ConnectionFactory;
+import meuapp.factory.ConnectionFactory;
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
 
@@ -25,7 +25,8 @@ public class MainGUI {
     private String selectedSchema;
     private String selectedLLM;
 
-    public MainGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, ConnectionFactory connectionFactory) {
+    public MainGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService,
+            ConnectionFactory connectionFactory) {
         SwingUtilities.invokeLater(() -> {
             try {
                 chooseLLMService.unloadLMStudioModel();
@@ -36,7 +37,8 @@ public class MainGUI {
         });
     }
 
-    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService, ConnectionFactory connectionFactory) throws IOException, InterruptedException {
+    private void configureGUI(DataBaseService dataBaseService, ChooseLLMService chooseLLMService,
+            ConnectionFactory connectionFactory) throws IOException, InterruptedException {
         JFrame frame = new JFrame("ChatBot");
         frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

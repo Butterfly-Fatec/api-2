@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.localai.LocalAiChatModel;
-import meuapp.config.ConnectionFactory;
+import meuapp.factory.ConnectionFactory;
 
 public class LMStudioService {
 
@@ -24,14 +24,16 @@ public class LMStudioService {
                 "Generate a SQL query to answer [QUESTION]{" + question + "}[/QUESTION]\n\n" +
 
                 "Instructions\n" +
-                "If you cannot answer the question with the available database schema, return 'Eu não sei'\n\n" +
+                "If you cannot answer the question with the available database schema, return 'Eu não sei'. No explanation needed.\n\n"
+                +
 
                 "Database Schema\n" +
                 "The query will run on a database with the following schema: {" + dataBaseService.getDataSchemas()
                 + "}\n\n" +
 
                 "Answer\n" +
-                "Given the database schema, here is the SQL query that answers [QUESTION]{" + question + "}[/QUESTION]\n" +
+                "Given the database schema, here is the SQL query that answers [QUESTION]{" + question
+                + "}[/QUESTION]\n" +
                 "[SQL] Your SQL query goes here[/SQL]";
 
         return model.generate(instructions);

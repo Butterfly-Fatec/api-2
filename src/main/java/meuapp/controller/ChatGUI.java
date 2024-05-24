@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -30,8 +29,8 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.text.html.HTMLEditorKit;
 
-import meuapp.config.ConnectionFactory;
-import meuapp.config.OutputStyles;
+import meuapp.factory.ConnectionFactory;
+import meuapp.factory.OutputStyles;
 import meuapp.service.ChooseLLMService;
 import meuapp.service.DataBaseService;
 import meuapp.service.LMStudioService;
@@ -48,7 +47,8 @@ public class ChatGUI {
     private int processingCounter = 0;
     private final Timer timer;
 
-    public ChatGUI(DataBaseService dataBaseService, String selectionSchemaGUI, ChooseLLMService chooseLLMService, ConnectionFactory connectionFactory) {
+    public ChatGUI(DataBaseService dataBaseService, String selectionSchemaGUI, ChooseLLMService chooseLLMService,
+            ConnectionFactory connectionFactory) {
         this.selectionSchemaGUI = selectionSchemaGUI;
         this.dataBaseService = dataBaseService;
         this.chooseLLMService = chooseLLMService;
@@ -184,7 +184,8 @@ public class ChatGUI {
 
         new Thread(() -> {
             try {
-                String response = LMStudioService.resultSQL(selectionSchemaGUI, LMStudioService.sendLMStudioQuery(userQuestion, dataBaseService), new ConnectionFactory());
+                String response = LMStudioService.resultSQL(selectionSchemaGUI,
+                        LMStudioService.sendLMStudioQuery(userQuestion, dataBaseService), new ConnectionFactory());
                 conversationHistory += "<b>Bot:</b> " + response + "<br><br>";
                 timer.stop();
 
@@ -198,7 +199,7 @@ public class ChatGUI {
     private void returnGUI() throws IOException, InterruptedException {
         jFrame.setVisible(false);
         ChooseLLMService chooseLLMService = new ChooseLLMService();
-        new MainGUI(dataBaseService,chooseLLMService,connectionFactory);
+        new MainGUI(dataBaseService, chooseLLMService, connectionFactory);
     }
 
     private Border createRoundedBorder() {
@@ -224,7 +225,6 @@ public class ChatGUI {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
-
 
     private void updateProcessingText() {
         String[] processingTexts = { "Processando<b>.<b>", "Processando<b>..<b>", "Processando<b>...<b>" };

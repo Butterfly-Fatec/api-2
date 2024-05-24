@@ -1,8 +1,11 @@
-package meuapp.config;
+package meuapp.factory;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
-import java.sql.*;
 
 public class ConnectionFactory {
     private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
@@ -10,7 +13,7 @@ public class ConnectionFactory {
     private String USER;
     private String PASSWORD;
 
-    public ConnectionFactory(){
+    public ConnectionFactory() {
         loadProperties();
     }
 
@@ -27,7 +30,7 @@ public class ConnectionFactory {
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(this.URL,this.USER, this.PASSWORD);
+        return DriverManager.getConnection(this.URL, this.USER, this.PASSWORD);
     }
 
     public String getURL() {
@@ -42,4 +45,3 @@ public class ConnectionFactory {
         return this.PASSWORD;
     }
 }
-

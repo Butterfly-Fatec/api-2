@@ -53,10 +53,11 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
 <img src="src/main/resources/static/img/sprint4.png" alt="img sprint 4" width="400"/>
 
 
-<details>
-<summary><h1>Backlogs</h1></summary>
 
-<details><summary><h2>Sprint 2</h2></summary>
+<h2>Backlogs</h2>
+
+---
+<details><summary><h3>Sprint 2</h3></summary>
 
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
 |------|------------|------------|------------|--------|-----------------------|------------------------|
@@ -66,7 +67,9 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
 | 4  | ALTA       | Eu, como desenvolvedor, quero executar comandos SQL no banco de dados para obter resultados relevantes para o usuário | 8 | 2 | RF4 | O sistema deve ser capaz de executar comandos SQL no banco de dados de forma segura e eficiente. |
 | 5  | ALTA       | Eu, como usuário, quero ver os resultados das consultas exibidos na tela para tomar decisões com base neles | 7 | 2 | RF5 | Os resultados das consultas devem ser exibidos de forma clara e organizada na tela. |
 </details>
-<details><summary><h2>Sprint 3</h2></summary>
+
+---
+<details><summary><h3>Sprint 3</h3></summary>
 
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
 |------|------------|------------|------------|--------|-----------------------|------------------------|
@@ -75,7 +78,8 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
 
 </details>
 
-<details><summary><h2>Sprint 4</h2></summary>
+---
+<details><summary><h3>Sprint 4</h3></summary>
 
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
 |------|------------|------------|------------|--------|-----------------------|------------------------|
@@ -83,7 +87,6 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
 | 9  | BAIXA      | Eu, como usuário, quero poder ler o manual do aplicativo para entender suas funcionalidades e como usá-lo | 5 | 4 | RNF1 | O manual do aplicativo deve estar disponível de forma clara e acessível para o usuário. |
 | 10  | BAIXA      | Eu, como usuário, quero poder ler o guia de instalação para o funcionamento do aplicativo para garantir uma instalação correta | 4 | 4 | RNF2 | O guia de instalação deve fornecer instruções claras e precisas para uma instalação correta do aplicativo. |
 
-</details>
 </details>
 
 ## MVP
@@ -125,7 +128,7 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
  </p>
 
  <p>
-   <img align="left" title="ollama" height="30px" src="https://pbs.twimg.com/profile_images/1755060270173429760/4WVc54_p_400x400.jpg"/>
+   <img align="left" title="lmstudio" height="30px" src="src\main\resources\static\img\lmstudio.ico"/>
    &nbsp; LM Studio - Executor de modelos de linguagem
  </p>
 

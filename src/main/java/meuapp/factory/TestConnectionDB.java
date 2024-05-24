@@ -1,4 +1,4 @@
-package meuapp.config;
+package meuapp.factory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
