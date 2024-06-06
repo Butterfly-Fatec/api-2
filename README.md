@@ -145,6 +145,37 @@ Somos alunos do 2° semestre do curso de Análise e Desenvolvimento de Sistemas 
 |   Dev Team    |     Paloma Lima da Silva     |  <a href="https://github.com/palomalima22"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  |                                              <a href="https://www.linkedin.com/in/paloma-lima-b2b00b201/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                                              |
 |   Dev Team    |    Victor Herculano Godoy    |  <a href="https://github.com/victorrgodoy"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Github-Dark.svg"></a>  |                                                  <a href="https://www.linkedin.com/in/victorgodoy-/"><img height="30px" src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/LinkedIn.svg"></a>                                                   |
 
+## Guia de Instalação
+
+1. **Instalar o LM Studio**
+   - Acesse o site [LM Studio](https://lmstudio.ai/) e siga as instruções para download e instalação.
+
+2. **Baixar um Modelo de Linguagem**
+   - Recomendamos o modelo "MaziyarPanahi/sqlcoder-7b-Mistral-7B-Instruct-v0.2-slerp-GGUF" com quantização "Q3_K_L".
+
+3. **Instalar o MySQL**
+   - Baixe e instale o MySQL a partir do [site oficial](https://www.mysql.com/).
+   - Configure seu banco de dados conforme necessário para o funcionamento do aplicativo.
+
+4. **Clonar o Repositório**
+   - Execute o seguinte comando no terminal para clonar o repositório:
+     ```sh
+     git clone https://github.com/Butterfly-Fatec/api-2.git
+     ```
+
+5. **Rodar o Main.java**
+   - Navegue até o diretório do projeto e execute o arquivo `main.java` para iniciar a aplicação.
+
+## Manual do Aplicativo
+
+1. **Iniciar a Aplicação:** Após rodar `main.java`, a interface principal da aplicação será exibida.
+
+2. **Selecionar um Banco de Dados e um Modelo de Linguagem:** Escolha o banco de dados que deseja utilizar e selecione o modelo de linguagem desejado através da opção de seleção disponível.
+
+3. **Fazer uma Consulta:** Escreva sua consulta em linguagem natural no campo destinado a isso.
+
+4. **Executar e Visualizar Resultados:** Clique no botão para executar a consulta e veja os resultados exibidos na tela.
+
 [Voltar ao topo](#topo)
 
  
