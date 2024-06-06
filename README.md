@@ -56,7 +56,6 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
 
 <h2>Backlogs</h2>
 
----
 <details><summary><h3>Sprint 2</h3></summary>
 
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
@@ -68,7 +67,7 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
 | 5  | ALTA       | Eu, como usuário, quero ver os resultados das consultas exibidos na tela para tomar decisões com base neles | 7 | 2 | RF5 | Os resultados das consultas devem ser exibidos de forma clara e organizada na tela. |
 </details>
 
----
+
 <details><summary><h3>Sprint 3</h3></summary>
 
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
@@ -78,7 +77,7 @@ Na Sprint 4, foi adicionada a função de alterar qualquer modelo de linguagem q
 
 </details>
 
----
+
 <details><summary><h3>Sprint 4</h3></summary>
 
 | Rank | Prioridade | User Story | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
